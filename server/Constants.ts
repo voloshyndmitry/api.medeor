@@ -4,12 +4,13 @@ interface IApiUrls {
 
 class Constants {
     private readonly _apiUrls: IApiUrls = {
-        getUrl : '/url'
+        getUrl: '/url',
+        main: '/'
     }
 
-     get apiUrls() {
-         return this._apiUrls
-     }
+    get apiUrls() {
+        return this._apiUrls
+    }
 }
 
 export default new Constants;

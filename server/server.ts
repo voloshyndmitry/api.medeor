@@ -4,6 +4,7 @@ import path from "path";
 import { UrlController } from './Api/UrlController'
 import cors from 'cors';
 import compression from 'compression';
+import { MainController } from "./Api/MainController";
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -15,5 +16,6 @@ app.use(cors())
 // app.use(express.static(path.join(__dirname, '../view/dist/view')));
 
 new UrlController(app)
+new MainController(app)
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
