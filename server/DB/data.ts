@@ -1,40 +1,34 @@
 export default {
-    get urls(){
-        return _urls
+    get users() {
+        return _users
     },
-    set urls(data: any) {
-        new Error('Object urls has read only permissions')
-    }
+    set users(data: any) {
+        new Error('Object users has read only permissions')
+    },
+    get autData() {
+        return _autData
+    },
+    set autData(data: any) {
+        new Error('Object users has read only permissions')
+    },
 }
 
-const _urls =  [
+const _autData = [
     {
-        "id": "DP1L1",
-        "title": "Nodejs: Hello world",
-        "description": "How to build simple Nodejs application.",
-        "url": "https://github.com/voloshyndmitry/cim-school/tree/master/examples/nodejs-l1"
-    },
+        login: 'Test',
+        pass: 'Qweqwe34',
+        id: "2915"
+    }
+]
+
+const _users = [
     {
-        "id": "DP2L1",
-        "title": "GIT: Part 1-2",
-        "description": "How to use Git?",
-        "url": "https://github.com/voloshyndmitry/cim-school/tree/master/examples/git-l1"
-    },
-    {
-        "id": "LP1L1",
-        "title": "Nodejs: Hello world",
-        "description": "How to build simple Nodejs application.",
-        "url": "https://github.com/voloshyndmitry/code-is-magic/"
-    },
-    {
-        "id": "MP1L1",
-        "title": "Nodejs: Hello world",
-        "description": "How to build simple Nodejs application.",
-        "url": "https://github.com/voloshyndmitry/code-is-magic/"
-    },{
-        "id": "DP3L1",
-        "title": "ReactJS: first project",
-        "description": "How to build your first react app.",
-        "url": "https://github.com/voloshyndmitry/cim-school/tree/master/examples/first-react-app/"
-    },
+        "id": "2915",
+        "name": "Alex",
+        "surname": "Aagesen",
+        "phone": "734-936-7175",
+        "Location": "Michigan Medicine NeuroSport | Domino's Farms",
+        "Specialties": "Sports Medicine (Physical Medicine & Rehab), Physical Medicine & Rehabilitation",
+        "photo": "https://cdn.sanity.io/images/0vv8moc6/hcplive/0ebb6a8f0c2850697532805d09d4ff10e838a74b-200x200.jpg"
+    }
 ]

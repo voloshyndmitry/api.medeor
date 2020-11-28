@@ -4,8 +4,9 @@ interface IApiUrls {
 
 class Constants {
     private readonly _apiUrls: IApiUrls = {
-        getUrl: '/url',
-        main: '/'
+        main: '/',
+        getUser: '/getUser',
+        getUserData: '/getUserData',
     }
 
     get apiUrls() {

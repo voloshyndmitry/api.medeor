@@ -9,15 +9,21 @@ interface IUrlData {
     description: string;
     url: string
 }
-export class DBConnector implements IDBConnector {
-    private readonly dataUrls: IUrlData[]
+export class DBConnector {
+    private readonly autData
+    private readonly users
+
     constructor() {
-        this.dataUrls = data.urls
+        this.autData = data.autData
+        this.users = data.users
     }
-    /**
-     * getUrlDataById
-     */
-    public getUrlDataById(id: string) {
-        return this.dataUrls.find(({id:urlId})=> id === urlId ) || null
+
+    public getUserId(login: string, pass: string) {
+        const user = this.autData.find((user: { login: string, pass: string }) => user.login === login && user.pass === pass);
+        return user?.id
+    }
+
+    public getUserDataById(id: string) {
+        return this.users.find((user: { id: string }) => user.id === id)
     }
 }
