@@ -27,8 +27,8 @@ const _users = [
         "name": "Alex",
         "surname": "Aagesen",
         "phone": "734-936-7175",
-        "Location": "Michigan Medicine NeuroSport | Domino's Farms",
-        "Specialties": "Sports Medicine (Physical Medicine & Rehab), Physical Medicine & Rehabilitation",
+        "location": "Michigan Medicine NeuroSport | Domino's Farms",
+        "specialties": "Sports Medicine (Physical Medicine & Rehab), Physical Medicine & Rehabilitation",
         "photo": "https://cdn.sanity.io/images/0vv8moc6/hcplive/0ebb6a8f0c2850697532805d09d4ff10e838a74b-200x200.jpg"
     }
 ]

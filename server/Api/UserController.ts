@@ -21,12 +21,14 @@ export class UrlController {
     private getUserId = (req: Request, res: Response) => {
         const { query: { login = '', pass = '' } } = req;
         const userId: string = this.dbConnector.getUserId(String(login), String(pass))
-        res.json({ userId } || this.defaultError)
+        const response = userId ? { userId } : this.defaultError;
+        res.json(response)
     }
 
     private getUserData = (req: Request, res: Response) => {
         const { query: { id } } = req;
         const user = this.dbConnector.getUserDataById(String(id))
-        res.json({ user } || this.defaultError)
+        const response = user || this.defaultError;
+        res.json(response)
     }
 }

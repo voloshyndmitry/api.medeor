@@ -9,7 +9,7 @@
             "url": "https://opensource.org/licenses/MIT"
         }
     },
-    "host": "localhost:3002",
+    "host": "api-medeor.herokuapp.com",
     "basePath": "/",
     "tags": [
         {
@@ -32,7 +32,7 @@
                         "type": "string",
                         "description": "Test",
                         "schema": {
-                            "$ref": "#/definitions/Pet"
+                            "$ref": "#/definitions/userId"
                         }
                     },
                     {
@@ -42,7 +42,7 @@
                         "type": "string",
                         "description": "Qweqwe34",
                         "schema": {
-                            "$ref": "#/definitions/Pet"
+                            "$ref": "#/definitions/userId"
                         }
                     }
                 ],
@@ -50,7 +50,35 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Users"
+                            "$ref": "#/definitions/userId"
+                        }
+                    }
+                }
+            }
+        },
+        "/getUserData": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get all users in system",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "2915",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
                         }
                     }
                 }
@@ -58,13 +86,34 @@
         }
     },
     "definitions": {
-        "User": {
-            "required": [
-                "login",
-                "pass"
-            ],
+        "userId": {
             "properties": {
                 "userId": {
+                    "type": "string"
+                }
+            }
+        },
+        "userData": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "surname": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "specialties": {
+                    "type": "string"
+                },
+                "photo": {
                     "type": "string"
                 }
             }
@@ -75,7 +124,8 @@
         }
     },
     "schemes": [
-        "http"
+        "http",
+        "https"
     ],
     "consumes": [
         "application/json"
