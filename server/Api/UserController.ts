@@ -6,7 +6,7 @@ export class UrlController {
     private readonly app: Application;
     private constants = Constants
     private dbConnector: DBConnector = new DBConnector
-
+    private defaultError: { error: string } = { error: "Can`t find the user." }
     constructor(app: Application) {
         this.app = app
         this.setRequestHandlers()
@@ -21,14 +21,12 @@ export class UrlController {
     private getUserId = (req: Request, res: Response) => {
         const { query: { login = '', pass = '' } } = req;
         const userId: string = this.dbConnector.getUserId(String(login), String(pass))
-        const defaultData = { error: "Can`t find the user." }
-        res.json(userId || defaultData)
+        res.json({ userId } || this.defaultError)
     }
 
     private getUserData = (req: Request, res: Response) => {
         const { query: { id } } = req;
         const user = this.dbConnector.getUserDataById(String(id))
-        const defaultData = { error: "Can`t find the user." }
-        res.json(user || defaultData)
+        res.json({ user } || this.defaultError)
     }
 }

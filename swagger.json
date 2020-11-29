@@ -24,6 +24,28 @@
                     "User"
                 ],
                 "summary": "Get all users in system",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "login",
+                        "required": true,
+                        "type": "string",
+                        "description": "Test",
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pass",
+                        "required": true,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -42,10 +64,7 @@
                 "pass"
             ],
             "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "pass": {
+                "userId": {
                     "type": "string"
                 }
             }
