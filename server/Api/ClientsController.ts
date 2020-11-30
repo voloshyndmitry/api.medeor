@@ -14,14 +14,22 @@ export class ClientsController {
     }
 
     private setRequestHandlers() {
-        const { apiUrls: { getClients } } = this.constants;
+        const { apiUrls: { getClients, getClient } } = this.constants;
         this.app.get(getClients, this.getClients)
+        this.app.get(getClient, this.getClient)
     }
 
     private getClients = (req: Request, res: Response) => {
         const { query: { id } } = req;
-        const clients: string = this.dbConnector.getClientsByDoctorId(String(id))
+        const clients: any[] = this.dbConnector.getClientsByDoctorId(String(id))
         const response = clients?.length ? { clients } : this.defaultError;
+        res.json(response)
+    }
+
+    private getClient = (req: Request, res: Response) => {
+        const { query: { id } } = req;
+        const client: any = this.dbConnector.getClientById(String(id))
+        const response = client || this.defaultError;
         res.json(response)
     }
 }

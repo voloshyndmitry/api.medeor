@@ -13,7 +13,7 @@
     "basePath": "/",
     "tags": [
         {
-            "name": "Users",
+            "name": "Client",
             "description": "API for users in the system"
         }
     ],
@@ -56,6 +56,34 @@
                 }
             }
         },
+        "/getClient": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Get all users in system",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "1606760413563",
+                        "schema": {
+                            "$ref": "#/definitions/client"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/client"
+                        }
+                    }
+                }
+            }
+        },
         "/getUserData": {
             "get": {
                 "tags": [
@@ -87,7 +115,7 @@
         "/getClients": {
             "get": {
                 "tags": [
-                    "User"
+                    "Client"
                 ],
                 "summary": "Get all users in system",
                 "parameters": [
@@ -96,7 +124,7 @@
                         "name": "id",
                         "required": true,
                         "type": "string",
-                        "description": "1606760413563",
+                        "description": "1606760413567",
                         "schema": {
                             "$ref": "#/definitions/userData"
                         }
@@ -114,6 +142,40 @@
         }
     },
     "definitions": {
+        "client": {
+            "properties": {
+                "doctorID": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "surname": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "string"
+                },
+                "age": {
+                    "type": "string"
+                },
+                "pregnancy": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "photo": {
+                    "type": "string"
+                }
+            }
+        },
         "clients": {
             "properties": {
                 "clients": {

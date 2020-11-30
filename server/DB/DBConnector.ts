@@ -32,4 +32,8 @@ export class DBConnector {
     public getClientsByDoctorId(id: string) {
         return this.clients.filter((user: { doctorID: string }) => user.doctorID === id)
     }
+
+    public getClientById(id: string) {
+        return this.clients.find((user: { id: string }) => user.id === id)
+    }
 }
