@@ -68,7 +68,7 @@
                         "name": "id",
                         "required": true,
                         "type": "string",
-                        "description": "2915",
+                        "description": "1606760413563",
                         "schema": {
                             "$ref": "#/definitions/userData"
                         }
@@ -83,9 +83,76 @@
                     }
                 }
             }
+        },
+        "/getClients": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get all users in system",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "1606760413563",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/clients"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "clients": {
+            "properties": {
+                "clients": {
+                    "type": "object",
+                    "properties": {
+                        "doctorID": {
+                            "type": "string"
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "surname": {
+                            "type": "string"
+                        },
+                        "sex": {
+                            "type": "string"
+                        },
+                        "age": {
+                            "type": "string"
+                        },
+                        "pregnancy": {
+                            "type": "string"
+                        },
+                        "phone": {
+                            "type": "string"
+                        },
+                        "email": {
+                            "type": "string"
+                        },
+                        "photo": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "userId": {
             "properties": {
                 "userId": {

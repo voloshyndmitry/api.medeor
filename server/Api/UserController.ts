@@ -2,7 +2,7 @@ import { Application, Request, Response } from 'express';
 import Constants from '../Constants';
 import { DBConnector } from '../DB/DBConnector';
 
-export class UrlController {
+export class UserController {
     private readonly app: Application;
     private constants = Constants
     private dbConnector: DBConnector = new DBConnector

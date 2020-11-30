@@ -1,12 +1,13 @@
 import express, { Request, Response } from "express";
 import bodyParser from 'body-parser';
 import path from "path";
-import { UrlController } from './Api/UserController'
+import { UserController } from './Api/UserController'
 import cors from 'cors';
 import compression from 'compression';
 import { MainController } from "./Api/MainController";
 import swaggerUi from 'swagger-ui-express';
 import session from 'express-session';
+import { ClientsController } from "./Api/ClientsController";
 const swaggerDocument = require("../swagger.json");
 
 const app = express();
@@ -25,7 +26,8 @@ app.use(session({
 }))
 // app.use(express.static(path.join(__dirname, '../view/dist/view')));
 
-new UrlController(app)
+new UserController(app)
 new MainController(app)
+new ClientsController(app)
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));

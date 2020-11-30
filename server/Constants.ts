@@ -7,6 +7,7 @@ class Constants {
         main: '/',
         getUser: '/getUser',
         getUserData: '/getUserData',
+        getClients: '/getClients',
     }
 
     get apiUrls() {
