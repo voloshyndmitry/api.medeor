@@ -54,15 +54,15 @@ const getUserDataById = async (id: string) => {
 }
 
 const getClientsByDoctorId = async (id: string) => {
-    const { data: result } = await client.db("medeordb").collection("clients")
+    const { clients: result } = await client.db("medeordb").collection("clients")
         .findOne()
-    return result.filter((user: { doctorID: string }) => user.doctorID === id)
+    return result.filter?.((user: { doctorID: string }) => user.doctorID === id)
 }
 
 const getClientById = async (id: string) => {
-    const { data: result } = await client.db("medeordb").collection("clients")
+    const { clients: result } = await client.db("medeordb").collection("clients")
         .findOne()
-    return result.find((user: { id: string }) => user.id === id)
+    return result?.find?.((user: { id: string }) => user.id === id)
 }
 
 // async function findOneListingByName(client: any, nameOfListing: string = '') {

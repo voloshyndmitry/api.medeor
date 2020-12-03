@@ -6,7 +6,7 @@ export class ClientsController {
     private readonly app: Application;
     private constants = Constants
     private dbConnector = MongoDb
-    private defaultError: { error: string } = { error: "Can`t find the client." }
+    private defaultError: { error: string } = { error: "Can`t find the client(s)." }
 
     constructor(app: Application) {
         this.app = app
