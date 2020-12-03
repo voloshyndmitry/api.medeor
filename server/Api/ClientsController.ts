@@ -1,11 +1,11 @@
 import { Application, Request, Response } from 'express';
 import Constants from '../Constants';
-import { DBConnector } from '../DB/DBConnector';
+import MongoDb from '../DB/mongoConnect';
 
 export class ClientsController {
     private readonly app: Application;
     private constants = Constants
-    private dbConnector: DBConnector = new DBConnector
+    private dbConnector = MongoDb
     private defaultError: { error: string } = { error: "Can`t find the client." }
 
     constructor(app: Application) {
@@ -19,16 +19,16 @@ export class ClientsController {
         this.app.get(getClient, this.getClient)
     }
 
-    private getClients = (req: Request, res: Response) => {
+    private getClients = async (req: Request, res: Response) => {
         const { query: { id } } = req;
-        const clients: any[] = this.dbConnector.getClientsByDoctorId(String(id))
+        const clients: any[] = await this.dbConnector.getClientsByDoctorId(String(id))
         const response = clients?.length ? { clients } : this.defaultError;
         res.json(response)
     }
 
-    private getClient = (req: Request, res: Response) => {
+    private getClient = async (req: Request, res: Response) => {
         const { query: { id } } = req;
-        const client: any = this.dbConnector.getClientById(String(id))
+        const client: any = await this.dbConnector.getClientById(String(id))
         const response = client || this.defaultError;
         res.json(response)
     }

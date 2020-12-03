@@ -8,6 +8,7 @@ import { MainController } from "./Api/MainController";
 import swaggerUi from 'swagger-ui-express';
 import session from 'express-session';
 import { ClientsController } from "./Api/ClientsController";
+import MongoDb from './DB/mongoConnect'
 const swaggerDocument = require("../swagger.json");
 
 const app = express();
@@ -29,5 +30,9 @@ app.use(session({
 new UserController(app)
 new MainController(app)
 new ClientsController(app)
-
+MongoDb.connect();
+process.on('uncaughtException', function (err) {
+    console.log('Caught exception: ' + err);
+    MongoDb.close();
+});
 app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
