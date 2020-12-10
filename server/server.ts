@@ -22,7 +22,8 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    // cookie: { secure: true }
+
+    cookie: { httpOnly: false, secure: false }
 }))
 // app.use(express.static(path.join(__dirname, '../view/dist/view')));
 
