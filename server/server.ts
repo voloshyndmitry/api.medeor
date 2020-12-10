@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import bodyParser from 'body-parser';
-import path from "path";
 import { UserController } from './Api/UserController'
 import cors from 'cors';
 import compression from 'compression';
@@ -23,16 +22,19 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    // cookie: { secure: true }
 }))
 // app.use(express.static(path.join(__dirname, '../view/dist/view')));
 
 new UserController(app)
 new MainController(app)
 new ClientsController(app)
+
 MongoDb.connect();
+
 process.on('uncaughtException', function (err) {
     console.log('Caught exception: ' + err);
     MongoDb.close();
 });
+
 app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
