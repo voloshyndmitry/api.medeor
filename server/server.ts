@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import bodyParser from 'body-parser';
 import { UserController } from './Api/UserController'
 import cors from 'cors';
@@ -27,6 +27,14 @@ app.use(session({
     saveUninitialized: true,
     cookie: { httpOnly: true, secure: true }
 }))
+
+app.use((err: string, req: Request, res: Response, next: NextFunction) => {
+    if (err) {
+        res.status(400).send('error parsing data')
+    } else {
+        next()
+    }
+})
 // app.use(express.static(path.join(__dirname, '../view/dist/view')));
 
 new UserController(app)

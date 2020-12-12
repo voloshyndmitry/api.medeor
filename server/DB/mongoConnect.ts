@@ -1,3 +1,5 @@
+import { User } from "../Interfaces/Users";
+
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config()
 
@@ -49,9 +51,24 @@ const getUserId = async (login: string, pass: string) => {
     return user?.id
 }
 
-const getUserDataById = async (id: string) => {
-    const { data: result } = await client.db("medeordb").collection("users")
+const addUser = async (user: User) => {
+    const { data: userIds } = await client.db("medeordb").collection("autData")
         .findOne()
+    const { data } = await getAllUsers();
+    await client.db("medeordb").collection("autData")
+        .updateOne({}, { $set: { data: [...userIds, { login: user.email, pass: user.pass, id: user.id }] } });
+    await client.db("medeordb").collection("users")
+        .updateOne({}, { $set: { data: [...data, user] } });
+    return user
+}
+
+const getAllUsers = async () => {
+    return client.db("medeordb").collection("users")
+        .findOne()
+}
+
+const getUserDataById = async (id: string) => {
+    const { data: result } = await getAllUsers()
     return result.find((user: { id: string }) => user.id === id)
 }
 
@@ -79,4 +96,12 @@ const getClientById = async (id: string) => {
 //     }
 // }
 
-export default { connect, close, getUserId, getUserDataById, getClientsByDoctorId, getClientById }
+export default {
+    connect,
+    close,
+    getUserId,
+    getUserDataById,
+    getClientsByDoctorId,
+    getClientById,
+    addUser
+}

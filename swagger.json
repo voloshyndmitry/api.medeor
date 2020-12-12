@@ -56,6 +56,31 @@
                 }
             }
         },
+        "/addUser": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get all users in system",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "user",
+                        "required": true,
+                        "type": "object",
+                        "description": "User object that needs to be added to the collection"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    }
+                }
+            }
+        },
         "/getClient": {
             "get": {
                 "tags": [
