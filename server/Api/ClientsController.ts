@@ -22,7 +22,6 @@ export class ClientsController {
     }
 
     private getClients = async (req: Request, res: Response) => {
-        // if (!this.autService.checkAutorize(req, res)) { return null }
         const { query: { id } } = req;
         const clients: any[] = await this.dbConnector.getClientsByDoctorId(String(id))
         const response = clients?.length ? { clients } : this.defaultError;
@@ -30,7 +29,6 @@ export class ClientsController {
     }
 
     private getClient = async (req: Request, res: Response) => {
-        // if (!this.autService.checkAutorize(req, res)) { return null }
         const { query: { id } } = req;
         const client: any = await this.dbConnector.getClientById(String(id))
         const response = client || this.defaultError;
