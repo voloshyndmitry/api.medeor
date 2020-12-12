@@ -18,16 +18,17 @@ export class UserController {
     private setRequestHandlers() {
         const { apiUrls: { getUser, getUserData } } = this.constants;
         this.app.get(getUser, this.getUserId)
-        this.app.get(getUserData, this.getUserData)
+        this.app.get(getUserData, this.autService.authenticateToken, this.getUserData)
     }
 
     private getUserId = async (req: Request, res: Response) => {
         const { query: { login = '', pass = '' } } = req;
         const userId: string = await this.dbConnector.getUserId(String(login), String(pass))
+        const response: any = userId ? { userId } : this.defaultError;
         if (userId) {
-            this.autService.setAutorization(req, userId)
+            const token = this.autService.generateAccessToken(userId);
+            response.token = token;
         }
-        const response = userId ? { userId } : this.defaultError;
         res.json(response)
     }
 

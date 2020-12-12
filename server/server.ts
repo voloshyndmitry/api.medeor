@@ -8,6 +8,8 @@ import swaggerUi from 'swagger-ui-express';
 import session from 'express-session';
 import { ClientsController } from "./Api/ClientsController";
 import MongoDb from './DB/mongoConnect'
+require('dotenv').config()
+
 const swaggerDocument = require("../swagger.json");
 
 const app = express();
@@ -22,8 +24,7 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-
-    cookie: { httpOnly: false, secure: false }
+    cookie: { httpOnly: true, secure: true }
 }))
 // app.use(express.static(path.join(__dirname, '../view/dist/view')));
 

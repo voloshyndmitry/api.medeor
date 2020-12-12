@@ -9,7 +9,7 @@
             "url": "https://opensource.org/licenses/MIT"
         }
     },
-    "host": "api-medeor.herokuapp.com",
+    "host": "localhost:3002",
     "basePath": "/",
     "tags": [
         {
@@ -97,6 +97,16 @@
                         "required": true,
                         "type": "string",
                         "description": "1606760413563",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token",
                         "schema": {
                             "$ref": "#/definitions/userData"
                         }
@@ -218,6 +228,9 @@
         "userId": {
             "properties": {
                 "userId": {
+                    "type": "string"
+                },
+                "token": {
                     "type": "string"
                 }
             }

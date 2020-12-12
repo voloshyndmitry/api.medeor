@@ -1,5 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://ultrauser:eLUaVMgDWXfy6ycU@clustermedeor.tpng0.mongodb.net/medeordb?retryWrites=true&w=majority";
+require('dotenv').config()
+
+const uri = process.env.DB_HOST;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const listDatabases = async () => {
@@ -10,7 +12,7 @@ const listDatabases = async () => {
 };
 
 const listConnections = async () => {
-    const collections = await client.db("medeordb").listCollections().toArray();
+    const collections = await client.db(process.env.DB_NAME).listCollections().toArray();
 
     console.log('collections: ', collections);
 

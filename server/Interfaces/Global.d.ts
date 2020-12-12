@@ -1,11 +1,7 @@
-import session, { SessionData } from "express-session";
+import { Request } from "express"
 
-
-// declare global {
-//     namespace Express {
-//         interface Session extends session.Session {
-//             _email?: string
-//         }
-//     }
+// declare module "express" { 
+//   export interface Request {
+//     user: any
+//   }
 // }
-export { };
