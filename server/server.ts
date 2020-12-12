@@ -9,8 +9,9 @@ import session from 'express-session';
 import { ClientsController } from "./Api/ClientsController";
 import MongoDb from './DB/mongoConnect'
 require('dotenv').config()
-
-const swaggerDocument = require("../swagger.json");
+const swaggerDocument: { [name: string]: any } = require("../swagger.json");
+const isDev = process.env.ENV === 'dev';
+swaggerDocument['host'] = isDev ? 'localhost:3002' : 'api-medeor.herokuapp.com';
 
 const app = express();
 const PORT = process.env.PORT || 3002;

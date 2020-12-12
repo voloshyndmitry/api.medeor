@@ -8,9 +8,9 @@
   "license": "MIT",
   "scripts": {
     "logs": "heroku logs --tail --app api-medeor",
-    "start": "node ./dist/server.js",
+    "start": "ENV=prod node ./dist/server.js",
     "build": "yarn tsc",
-    "dev": "yarn build:live",
+    "dev": "ENV=dev yarn build:live",
     "tsc": "tsc",
     "build:live": "nodemon --watch 'server/**/*.ts' --exec ts-node server/server.ts"
   },
