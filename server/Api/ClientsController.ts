@@ -17,8 +17,8 @@ export class ClientsController {
 
     private setRequestHandlers() {
         const { apiUrls: { getClients, getClient } } = this.constants;
-        this.app.get(getClients, this.getClients)
-        this.app.get(getClient, this.getClient)
+        this.app.get(getClients, this.autService.authenticateToken, this.getClients)
+        this.app.get(getClient, this.autService.authenticateToken, this.getClient)
     }
 
     private getClients = async (req: Request, res: Response) => {
