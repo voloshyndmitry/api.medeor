@@ -62,6 +62,20 @@ const addUser = async (user: User) => {
     return user
 }
 
+const updateUser = async (user: User) => {
+    const { data } = await getAllUsers();
+    const updatedUsers = data.map((item: User) => {
+        if (item.id === user.id) {
+            return { ...item, ...user }
+        }
+        return user
+    })
+
+    await client.db("medeordb").collection("users")
+        .updateOne({}, { $set: { data: updatedUsers } });
+    return user
+}
+
 const getAllUsers = async () => {
     return client.db("medeordb").collection("users")
         .findOne()
@@ -103,5 +117,6 @@ export default {
     getUserDataById,
     getClientsByDoctorId,
     getClientById,
-    addUser
+    addUser,
+    updateUser
 }

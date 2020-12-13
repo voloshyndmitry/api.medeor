@@ -17,10 +17,11 @@ export class UserController {
     }
 
     private setRequestHandlers() {
-        const { apiUrls: { getUser, getUserData, addUser } } = this.constants;
+        const { apiUrls: { getUser, getUserData, addUser, updateUser } } = this.constants;
         this.app.get(getUser, this.getUserId)
         this.app.get(getUserData, this.autService.authenticateToken, this.getUserData)
         this.app.post(addUser, this.addUser)
+        this.app.put(updateUser, this.updateUser)
     }
 
     private getUserId = async (req: Request, res: Response) => {
@@ -49,6 +50,16 @@ export class UserController {
             body.id = this.generateUserId()
             const result = await this.dbConnector.addUser(body)
 
+            res.json(result)
+        } else {
+            res.status(409).json({ message: 'Please add all required params: [name, surname, phone, location, specialties]' })
+        }
+    }
+    private updateUser = async (req: Request, res: Response) => {
+        const { query } = req;
+        if (query?.id) {
+
+            const result = await this.dbConnector.updateUser(query as any)
             res.json(result)
         } else {
             res.status(409).json({ message: 'Please add all required params: [name, surname, phone, location, specialties]' })

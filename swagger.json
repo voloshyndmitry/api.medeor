@@ -56,6 +56,114 @@
                 }
             }
         },
+        "/updateUser": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "Test",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "name",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "surname",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "phone",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "location",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "specialties",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pass",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "email",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "photo",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    }
+                }
+            }
+        },
         "/addUser": {
             "post": {
                 "tags": [
