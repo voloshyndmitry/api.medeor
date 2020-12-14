@@ -81,9 +81,29 @@ const getAllUsers = async () => {
         .findOne()
 }
 
+const getAllAuthData = async () => {
+    return client.db("medeordb").collection("autData")
+        .findOne()
+}
+
 const getUserDataById = async (id: string) => {
     const { data: result } = await getAllUsers()
     return result.find((user: { id: string }) => user.id === id)
+}
+
+const deleteUserById = async (id: string) => {
+    const { data: result } = await getAllUsers();
+    const usersFilter = (user: { id: string }) => user.id !== id
+    const users = result.filter(usersFilter);
+    await client.db("medeordb").collection("users")
+        .updateOne({}, { $set: { data: users } });
+
+    const { data: autData } = await getAllAuthData();
+    const filtereAutData = autData.filter(usersFilter)
+    await client.db("medeordb").collection("autData")
+        .updateOne({}, { $set: { data: filtereAutData } });
+
+    return users
 }
 
 const getClientsByDoctorId = async (id: string) => {
@@ -118,5 +138,6 @@ export default {
     getClientsByDoctorId,
     getClientById,
     addUser,
-    updateUser
+    updateUser,
+    deleteUserById
 }

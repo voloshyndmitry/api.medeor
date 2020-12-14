@@ -13,15 +13,15 @@
     "basePath": "/",
     "tags": [
         {
-            "name": "Client",
+            "name": "Client Controller",
             "description": "API for users in the system"
         }
     ],
     "paths": {
-        "/getUser": {
+        "/login": {
             "get": {
                 "tags": [
-                    "User"
+                    "User Controller"
                 ],
                 "summary": "Get all users in system",
                 "parameters": [
@@ -56,10 +56,10 @@
                 }
             }
         },
-        "/updateUser": {
+        "/user": {
             "put": {
                 "tags": [
-                    "User"
+                    "User Controller"
                 ],
                 "summary": "Update user",
                 "parameters": [
@@ -162,12 +162,10 @@
                         }
                     }
                 }
-            }
-        },
-        "/addUser": {
+            },
             "post": {
                 "tags": [
-                    "User"
+                    "User Controller"
                 ],
                 "summary": "Get all users in system",
                 "parameters": [
@@ -187,40 +185,10 @@
                         }
                     }
                 }
-            }
-        },
-        "/getClient": {
+            },
             "get": {
                 "tags": [
-                    "Client"
-                ],
-                "summary": "Get all users in system",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "id",
-                        "required": true,
-                        "type": "string",
-                        "description": "1606760413563",
-                        "schema": {
-                            "$ref": "#/definitions/client"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/client"
-                        }
-                    }
-                }
-            }
-        },
-        "/getUserData": {
-            "get": {
-                "tags": [
-                    "User"
+                    "User Controller"
                 ],
                 "summary": "Get all users in system",
                 "parameters": [
@@ -253,12 +221,73 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "User Controller"
+                ],
+                "summary": "Delete users by id in system",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "1606760413563"
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    }
+                }
+            }
+        },
+        "/getClient": {
+            "get": {
+                "tags": [
+                    "Client Controller"
+                ],
+                "summary": "Get all users in system",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "1606760413563",
+                        "schema": {
+                            "$ref": "#/definitions/client"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/client"
+                        }
+                    }
+                }
             }
         },
         "/getClients": {
             "get": {
                 "tags": [
-                    "Client"
+                    "Client Controller"
                 ],
                 "summary": "Get all users in system",
                 "parameters": [
