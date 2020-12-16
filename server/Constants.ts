@@ -7,6 +7,8 @@ class Constants {
         main: '/',
         user: '/user',
         login: '/login',
+        client: '/client',
+        clients: '/clients',
         getClients: '/getClients',
         getClient: '/getClient',
     }

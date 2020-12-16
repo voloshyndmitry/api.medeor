@@ -57,6 +57,42 @@
             }
         },
         "/user": {
+            "get": {
+                "tags": [
+                    "User Controller"
+                ],
+                "summary": "Get all users in system",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "1606760413563",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "User Controller"
@@ -152,6 +188,16 @@
                         "schema": {
                             "$ref": "#/definitions/userId"
                         }
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
                     }
                 ],
                 "responses": {
@@ -175,32 +221,6 @@
                         "required": true,
                         "type": "object",
                         "description": "User object that needs to be added to the collection"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
-                    }
-                }
-            },
-            "get": {
-                "tags": [
-                    "User Controller"
-                ],
-                "summary": "Get all users in system",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "id",
-                        "required": true,
-                        "type": "string",
-                        "description": "1606760413563",
-                        "schema": {
-                            "$ref": "#/definitions/userData"
-                        }
                     },
                     {
                         "in": "header",
@@ -217,7 +237,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userData"
+                            "$ref": "#/definitions/userId"
                         }
                     }
                 }
@@ -256,7 +276,7 @@
                 }
             }
         },
-        "/getClient": {
+        "/client": {
             "get": {
                 "tags": [
                     "Client Controller"
@@ -272,6 +292,16 @@
                         "schema": {
                             "$ref": "#/definitions/client"
                         }
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
                     }
                 ],
                 "responses": {
@@ -282,9 +312,175 @@
                         }
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "Client Controller"
+                ],
+                "summary": "Update user",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "Test",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "name",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "surname",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "phone",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "location",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pass",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "email",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "photo",
+                        "required": false,
+                        "type": "string",
+                        "description": "Qweqwe34",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Client Controller"
+                ],
+                "summary": "Get all users in system",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "user",
+                        "required": true,
+                        "type": "object",
+                        "description": "User object that needs to be added to the collection"
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Client Controller"
+                ],
+                "summary": "Delete users by id in system",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "1606760413563"
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    }
+                }
             }
         },
-        "/getClients": {
+        "/clients": {
             "get": {
                 "tags": [
                     "Client Controller"

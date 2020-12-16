@@ -3,6 +3,7 @@ import { Application, Request, Response } from 'express';
 import Constants from '../Constants';
 import MongoDb from '../DB/mongoConnect'
 import { AutorizeService } from '../Services/AutorizeService';
+import { addUser, deleteUserById, getUserDataById, updateUser } from '../DB/Users';
 
 
 export class UserController {
@@ -38,7 +39,7 @@ export class UserController {
 
     private getUserData = async (req: Request, res: Response) => {
         const { query: { id } } = req;
-        const user = await this.dbConnector.getUserDataById(String(id))
+        const user = await getUserDataById(String(id))
 
         if (user) {
             return res.json(user)
@@ -48,7 +49,7 @@ export class UserController {
 
     private deleteUser = async (req: Request, res: Response) => {
         const { body: { id } } = req;
-        const users = await this.dbConnector.deleteUserById(String(id))
+        const users = await deleteUserById(String(id))
 
         if (users) {
             return res.json({ users })
@@ -62,7 +63,7 @@ export class UserController {
         const { body } = req;
         if (this.userValidation(body)) {
             body.id = this.generateUserId()
-            const result = await this.dbConnector.addUser(body)
+            const result = await addUser(body)
 
             return res.json(result)
         }
@@ -72,7 +73,7 @@ export class UserController {
         const { query } = req;
         if (query?.id) {
 
-            const result = await this.dbConnector.updateUser(query as any)
+            const result = await updateUser(query as any)
             return res.json(result)
         }
         res.status(409).json({ message: 'Please add all required params: [name, surname, phone, location, specialties]' })

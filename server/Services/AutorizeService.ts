@@ -19,10 +19,12 @@ export class AutorizeService {
             return res.status(401).json({ message: errorMessage }) // if there isn't any token
         }
 
-        jwt.verify(token, process.env.TOKEN_SECRET, (err: any, user: any) => {
-            console.log('jwt error:', err)
-            if (err) return res.sendStatus(403)
-            req.user = user
+        jwt.verify(token, process.env.TOKEN_SECRET, (err: any, userId: string) => {
+            if (err) {
+                console.log('jwt error:', err)
+                return res.sendStatus(403)
+            }
+            req.userId = userId
             next() // pass the execution off to whatever request the client intended
         })
     }
