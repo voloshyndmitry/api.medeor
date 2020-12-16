@@ -3,14 +3,15 @@ import Mongo from '../mongoConnect';
 
 const { client } = Mongo;
 
-const getAllClients = (): Promise<Client[]> => {
-    return client.db("medeordb").collection("clients")
+const getAllClients = async (): Promise<Client[]> => {
+    const { clients } = await client.db("medeordb").collection("clients")
         .findOne()
+    return clients
 }
 
 const getClientsByDoctorId = async (id: string): Promise<Client[]> => {
-    const result = await getAllClients();
-    return result.filter?.((user: { doctorID: string }) => user.doctorID === id)
+    const clients: Client[] = await getAllClients();
+    return clients.filter?.((user: Client) => user.doctorID === String(id))
 }
 
 const updateClient = async (updatedClient: Client, doctorID: string): Promise<Client[]> => {

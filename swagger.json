@@ -488,16 +488,6 @@
                 "summary": "Get all users in system",
                 "parameters": [
                     {
-                        "in": "query",
-                        "name": "id",
-                        "required": true,
-                        "type": "string",
-                        "description": "1606760413567",
-                        "schema": {
-                            "$ref": "#/definitions/userData"
-                        }
-                    },
-                    {
                         "in": "header",
                         "name": "authorization",
                         "required": true,
