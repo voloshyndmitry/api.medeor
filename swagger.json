@@ -496,6 +496,13 @@
                         "schema": {
                             "$ref": "#/definitions/userData"
                         }
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token"
                     }
                 ],
                 "responses": {
