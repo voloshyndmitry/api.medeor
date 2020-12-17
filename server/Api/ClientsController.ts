@@ -49,8 +49,8 @@ export class ClientsController {
     }
 
     private updateClient = async (req: AuthRequest, res: Response) => {
-        const { query, userId = '' } = req;
-        const client: Client = this.validateClient({ ...query, doctorID: userId })
+        const { body, userId = '' } = req;
+        const client: Client = this.validateClient({ ...body, doctorID: userId })
         const data: any = await updateClient(client, userId);
         if (data) {
             return res.json(data)
@@ -60,19 +60,19 @@ export class ClientsController {
     }
 
     private addClient = async (req: AuthRequest, res: Response) => {
-        const { query, userId = '' } = req;
-        const newClient = { ...query, doctorID: userId, id: new Date().getTime() }
+        const { body, userId = '' } = req;
+        const newClient = { ...body, doctorID: userId, id: new Date().getTime().toString() }
         const client: Client = this.validateClient(newClient)
         const data: any = await addClient(client)
         if (data) {
-            return res.json(newClient)
+            return res.json(data)
         }
 
         return res.status(500).json({ message: 'Some things went wrong' })
     }
 
     private deleteClient = async (req: AuthRequest, res: Response) => {
-        const { query: { id }, userId = '' } = req;
+        const { body: { id }, userId = '' } = req;
         const data: any = await deleteClientById(String(id), userId)
         if (data) {
             return res.json(data)

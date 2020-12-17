@@ -24,8 +24,8 @@ const updateClient = async (updatedClient: Client, doctorID: string): Promise<Cl
 
 const addClient = async (data: Client): Promise<Client> => {
     const clients: Client[] = await getAllClients();
-    await client.db("medeordb").collection("clients")
-        .updateOne({}, { $set: { clients: [...clients, data] } });
+    // await client.db("medeordb").collection("clients")
+    //     .updateOne({}, { $set: { clients: [...clients, data] } });
     return data;
 }
 
