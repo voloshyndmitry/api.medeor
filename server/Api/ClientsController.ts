@@ -62,10 +62,11 @@ export class ClientsController {
 
     private addClient = async (req: AuthRequest, res: Response) => {
         const { query, userId = '' } = req;
-        const client: Client = this.validateClient({ ...query, doctorID: userId })
+        const newClient = { ...query, doctorID: userId, id: new Date().getTime() }
+        const client: Client = this.validateClient(newClient)
         const data: any = await addClient(client)
         if (data) {
-            return res.json(data)
+            return res.json(newClient)
         }
 
         return res.status(500).json({ message: 'Some things went wrong' })
