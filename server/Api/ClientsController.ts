@@ -21,8 +21,8 @@ export class ClientsController {
         const { apiUrls: { client, clients } } = this.constants;
         this.app.get(clients, this.autService.authenticateToken, this.getClients)
         this.app.get(client, this.autService.authenticateToken, this.getClient)
-        this.app.put(client, this.autService.authenticateToken, this.addClient)
-        this.app.post(client, this.autService.authenticateToken, this.updateClient)
+        this.app.post(client, this.autService.authenticateToken, this.addClient)
+        this.app.put(client, this.autService.authenticateToken, this.updateClient)
         this.app.delete(client, this.autService.authenticateToken, this.deleteClient)
     }
 
