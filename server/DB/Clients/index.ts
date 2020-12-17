@@ -18,14 +18,14 @@ const updateClient = async (updatedClient: Client, doctorID: string): Promise<Cl
     const clients: Client[] = await getAllClients();
     const data: Client[] = clients?.map?.((user: Client) => user.id === updatedClient.id && user.doctorID === doctorID ? { ...user, ...updateClient } : user)
     await client.db("medeordb").collection("clients")
-        .updateOne({}, { $set: { data } });
+        .updateOne({}, { $set: { clients: data } });
     return data;
 }
 
 const addClient = async (data: Client): Promise<Client> => {
     const clients: Client[] = await getAllClients();
     await client.db("medeordb").collection("clients")
-        .updateOne({}, { $set: { data: [...clients, data] } });
+        .updateOne({}, { $set: { clients: [...clients, data] } });
     return data;
 }
 
@@ -33,7 +33,7 @@ const deleteClientById = async (id: string, doctorID: string): Promise<Client[]>
     const clients: Client[] = await getAllClients();
     const data: Client[] = clients?.filter?.((data: Client) => data.id !== id && data.doctorID === doctorID)
     await client.db("medeordb").collection("clients")
-        .updateOne({}, { $set: { data } });
+        .updateOne({}, { $set: { clients: data } });
     return data;
 }
 
