@@ -14,7 +14,7 @@ enum EMessage {
     SUR_NAME = 'surName',
     EMAIL = 'email',
     SEX = 'sex',
-    AGE = 'age',
+    BIRTHDAY = 'birthday',
     PHONE = 'phone',
     PASS = 'pass',
 }
@@ -59,7 +59,7 @@ export const clientValidation = (client: any): Client | IErrorMessage => {
     if (!name) { return getError(ErrorType.REQUIRED, EMessage.NAME) }
     if (!surname) { return getError(ErrorType.REQUIRED, EMessage.SUR_NAME) }
     if (!sex) { return getError(ErrorType.REQUIRED, EMessage.SEX) }
-    if (!birthday) { return getError(ErrorType.REQUIRED, EMessage.AGE) }
+    if (!birthday) { return getError(ErrorType.REQUIRED, EMessage.BIRTHDAY) }
     if (!phone) { return getError(ErrorType.REQUIRED, EMessage.PHONE) }
     if (!email) { return getError(ErrorType.REQUIRED, EMessage.EMAIL) }
     if (!isPhone(phone)) { return getError(ErrorType.VALIDATION, EMessage.PHONE) }

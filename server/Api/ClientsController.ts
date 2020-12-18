@@ -1,11 +1,10 @@
 import { AuthRequest } from './../Interfaces/Autorization';
-import { Application, Request, Response } from 'express';
+import { Application, Response } from 'express';
 import Constants from '../Constants';
 import { addClient, deleteClientById, getClientById, getClientsByDoctorId, updateClient } from '../DB/Clients';
-import MongoDb from '../DB/mongoConnect';
 import { AuthorizeService } from '../Services/AuthorizeService';
 import { Client } from '../Interfaces/Clients';
-import { clientValidation, IErrorMessage } from '../Helpers/Validation';
+import { clientValidation } from '../Helpers/Validation';
 
 export class ClientsController {
     private readonly app: Application;
@@ -53,7 +52,7 @@ export class ClientsController {
             return res.json(data)
         }
 
-        return res.status(400).json(client?.error || this.validationError)
+        return res.status(400).json(client || this.validationError)
     }
 
     private addClient = async (req: AuthRequest, res: Response) => {
@@ -65,7 +64,7 @@ export class ClientsController {
             return res.json(data)
         }
 
-        return res.status(400).json(client?.error || this.validationError)
+        return res.status(409).json(client || this.validationError)
     }
 
     private deleteClient = async (req: AuthRequest, res: Response) => {
@@ -75,7 +74,7 @@ export class ClientsController {
             return res.json(data)
         }
 
-        return res.status(400).json(this.defaultError)
+        return res.status(409).json(this.defaultError)
 
     }
 }

@@ -69,7 +69,7 @@ export class UserController {
 
             return res.json(result)
         }
-        res.status(409).json(user?.error)
+        res.status(409).json(user)
     }
 
     private updateUser = async (req: Request, res: Response) => {
@@ -80,6 +80,6 @@ export class UserController {
             const result = await updateUser(user as User)
             return res.json(result)
         }
-        res.status(409).json(user?.error)
+        res.status(409).json(user)
     }
 }
