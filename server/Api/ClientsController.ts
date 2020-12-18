@@ -3,14 +3,16 @@ import { Application, Request, Response } from 'express';
 import Constants from '../Constants';
 import { addClient, deleteClientById, getClientById, getClientsByDoctorId, updateClient } from '../DB/Clients';
 import MongoDb from '../DB/mongoConnect';
-import { AutorizeService } from '../Services/AutorizeService';
+import { AuthorizeService } from '../Services/AuthorizeService';
 import { Client } from '../Interfaces/Clients';
+import { clientValidation, IErrorMessage } from '../Helpers/Validation';
 
 export class ClientsController {
     private readonly app: Application;
     private constants = Constants
-    private autService: AutorizeService = new AutorizeService
+    private autService: AuthorizeService = new AuthorizeService
     private defaultError: { error: string } = { error: "Can`t find the client(s)." }
+    private validationError: { error: string } = { error: 'Validation Error: name ,surname ,sex ,age ,phone ,email are required values' }
 
     constructor(app: Application) {
         this.app = app
@@ -43,32 +45,27 @@ export class ClientsController {
         res.json(response)
     }
 
-    private validateClient(data: any): Client {
-        //TODO: add validation
-        return data
-    }
-
     private updateClient = async (req: AuthRequest, res: Response) => {
         const { body, userId = '' } = req;
-        const client: Client = this.validateClient({ ...body, doctorID: userId })
-        const data: any = await updateClient(client, userId);
-        if (data) {
+        const client: any = clientValidation({ ...body, doctorID: userId })
+        if (!client.error) {
+            const data = await updateClient(client as Client, userId);
             return res.json(data)
         }
 
-        return res.status(500).json({ message: 'Some things went wrong' })
+        return res.status(400).json(client?.error || this.validationError)
     }
 
     private addClient = async (req: AuthRequest, res: Response) => {
         const { body, userId = '' } = req;
         const newClient = { ...body, doctorID: userId, id: new Date().getTime().toString() }
-        const client: Client = this.validateClient(newClient)
-        const data: any = await addClient(client)
-        if (data) {
+        const client: any = clientValidation(newClient)
+        if (!client.error) {
+            const data = await addClient(client as Client)
             return res.json(data)
         }
 
-        return res.status(500).json({ message: 'Some things went wrong' })
+        return res.status(400).json(client?.error || this.validationError)
     }
 
     private deleteClient = async (req: AuthRequest, res: Response) => {

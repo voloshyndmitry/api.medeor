@@ -2,8 +2,8 @@ import { AuthRequest } from './../Interfaces/Autorization';
 import { Request, Response, NextFunction } from 'express';
 require('dotenv').config()
 const jwt = require("jsonwebtoken");
-const errorMessage: string = 'Not Autorized'
-export class AutorizeService {
+const errorMessage: string = 'Not Authorized'
+export class AuthorizeService {
 
     generateAccessToken(username: string) {
         // expires after half and hour (1800 seconds = 30 minutes)
@@ -34,10 +34,10 @@ export class AutorizeService {
         session._email = name
     }
 
-    checkAutorize(req: Request, res: Response) {
+    checkAuthorize(req: Request, res: Response) {
         const session: any = req.session;
-        const isAutorized: boolean = Boolean(session._email)
-        if (isAutorized) {
+        const isAuthorized: boolean = Boolean(session._email)
+        if (isAuthorized) {
             return true;
         }
         res.status(401).send({ message: errorMessage })

@@ -2,14 +2,15 @@ import { User } from './../Interfaces/Users';
 import { Application, Request, Response } from 'express';
 import Constants from '../Constants';
 import MongoDb from '../DB/mongoConnect'
-import { AutorizeService } from '../Services/AutorizeService';
+import { AuthorizeService as AuthorizeService } from '../Services/AuthorizeService';
 import { addUser, deleteUserById, getUserDataById, updateUser } from '../DB/Users';
+import { userValidation } from '../Helpers/Validation';
 
 
 export class UserController {
     private readonly app: Application;
     private constants = Constants
-    private autService: AutorizeService = new AutorizeService
+    private autService: AuthorizeService = new AuthorizeService
     private dbConnector = MongoDb
     private defaultError: { error: string } = { error: "Can`t find the user." }
     constructor(app: Application) {
@@ -41,7 +42,7 @@ export class UserController {
         const { query: { id } } = req;
         const user = await getUserDataById(String(id))
 
-        if (user) {
+        if (!user.error) {
             return res.json(user)
         }
         res.status(404).json(this.defaultError)
@@ -61,44 +62,24 @@ export class UserController {
 
     private addUser = async (req: Request, res: Response) => {
         const { body } = req;
-        if (this.userValidation(body)) {
+        const user: any = userValidation(body)
+        if (!user.error) {
             body.id = this.generateUserId()
             const result = await addUser(body)
 
             return res.json(result)
         }
-        res.status(409).json({ message: 'Please add all required params: [name, surname, phone, location, specialties]' })
+        res.status(409).json(user?.error)
     }
-    private updateUser = async (req: Request, res: Response) => {
-        const { query } = req;
-        if (query?.id) {
 
-            const result = await updateUser(query as any)
+    private updateUser = async (req: Request, res: Response) => {
+        const { body } = req;
+        const user: any = userValidation(body)
+        if (user.error) {
+
+            const result = await updateUser(user as User)
             return res.json(result)
         }
-        res.status(409).json({ message: 'Please add all required params: [name, surname, phone, location, specialties]' })
-    }
-
-    private userValidation = (user: User) => {
-        const {
-            name,
-            surname,
-            phone,
-            location,
-            specialties,
-            email,
-            pass
-        } = user;
-
-        if (!name ||
-            !surname ||
-            !email ||
-            !pass ||
-            !phone ||
-            !location ||
-            !specialties) {
-            return false
-        }
-        return true
+        res.status(409).json(user?.error)
     }
 }

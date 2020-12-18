@@ -1,10 +1,10 @@
 export interface Client {
-    doctorID: string,
-    id: string,
+    doctorID?: string,
+    id?: string,
     name: string,
     surname: string,
     sex: string,
-    age: string,
+    birthday: string,
     pregnancy: string,
     phone: string,
     email: string,
