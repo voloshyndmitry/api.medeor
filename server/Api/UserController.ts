@@ -49,7 +49,7 @@ export class UserController {
     }
 
     private deleteUser = async (req: Request, res: Response) => {
-        const { body: { id } } = req;
+        const { query: { id } } = req;
         const users = await deleteUserById(String(id))
 
         if (users) {

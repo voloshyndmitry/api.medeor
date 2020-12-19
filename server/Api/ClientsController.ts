@@ -68,7 +68,7 @@ export class ClientsController {
     }
 
     private deleteClient = async (req: AuthRequest, res: Response) => {
-        const { body: { id }, userId = '' } = req;
+        const { query: { id }, userId = '' } = req;
         const data: any = await deleteClientById(String(id), userId)
         if (data) {
             return res.json(data)
