@@ -40,7 +40,7 @@ export interface IErrorMessage {
 }
 
 const getError = (type: ErrorType, message: EMessage): IErrorMessage => {
-    return { error: errorMessage?.[type]?.[message] }
+    return { error: errorMessage?.[type]?.[message] || `Validation error: ${message}` }
 }
 
 export const clientValidation = (client: any): Client | IErrorMessage => {
