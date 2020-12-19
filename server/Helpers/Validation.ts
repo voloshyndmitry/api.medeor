@@ -45,6 +45,7 @@ const getError = (type: ErrorType, message: EMessage): IErrorMessage => {
 
 export const clientValidation = (client: any): Client | IErrorMessage => {
     const {
+        id,
         doctorID,
         name,
         surname,
@@ -66,6 +67,7 @@ export const clientValidation = (client: any): Client | IErrorMessage => {
     if (!isEmail(email)) { return getError(ErrorType.VALIDATION, EMessage.EMAIL) }
 
     return {
+        id,
         doctorID,
         name,
         surname,
@@ -80,6 +82,7 @@ export const clientValidation = (client: any): Client | IErrorMessage => {
 
 export const userValidation = (user: User) => {
     const {
+        id,
         name,
         surname,
         phone = '',
@@ -96,6 +99,7 @@ export const userValidation = (user: User) => {
     if (!isEmail(email)) { return getError(ErrorType.VALIDATION, EMessage.EMAIL) }
 
     return {
+        id,
         name,
         surname,
         phone,
