@@ -33,7 +33,7 @@ export class ClientsController {
         if (clients?.length) {
             return res.json({ clients })
         }
-        return res.status(400).json(this.defaultError)
+        return res.status(400).send(this.defaultError)
     }
 
     private getClient = async (req: AuthRequest, res: Response) => {
@@ -52,7 +52,7 @@ export class ClientsController {
             return res.json(data)
         }
 
-        return res.status(400).json(client || this.validationError)
+        return res.status(400).send(client || this.validationError)
     }
 
     private addClient = async (req: AuthRequest, res: Response) => {
@@ -64,7 +64,7 @@ export class ClientsController {
             return res.json(data)
         }
 
-        return res.status(409).json(client || this.validationError)
+        return res.status(400).send(client || this.validationError)
     }
 
     private deleteClient = async (req: AuthRequest, res: Response) => {
@@ -74,7 +74,7 @@ export class ClientsController {
             return res.json(data)
         }
 
-        return res.status(409).json(this.defaultError)
+        return res.status(400).send(this.defaultError)
 
     }
 }
