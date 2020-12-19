@@ -35,7 +35,7 @@ export class UserController {
             const token = this.autService.generateAccessToken(userId);
             return res.json({ userId, token })
         }
-        res.status(404).send(this.defaultError)
+        res.json(this.defaultError)
     }
 
     private getUserData = async (req: Request, res: Response) => {
@@ -45,7 +45,7 @@ export class UserController {
         if (!user.error) {
             return res.json(user)
         }
-        res.status(404).send(this.defaultError)
+        res.json(this.defaultError)
     }
 
     private deleteUser = async (req: Request, res: Response) => {
@@ -55,7 +55,7 @@ export class UserController {
         if (users) {
             return res.json({ users })
         }
-        res.status(400).send(this.defaultError)
+        res.json(this.defaultError)
     }
 
     private generateUserId = (): string => new Date().getTime().toString();
@@ -69,7 +69,7 @@ export class UserController {
 
             return res.json(result)
         }
-        res.status(400).send(user)
+        res.json(user)
     }
 
     private updateUser = async (req: Request, res: Response) => {
@@ -80,6 +80,6 @@ export class UserController {
             const result = await updateUser(user as User)
             return res.json(result)
         }
-        res.status(400).send(user)
+        res.json(user)
     }
 }
