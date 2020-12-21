@@ -97,7 +97,8 @@ export const userValidation = (user: User) => {
     if (!name) { return getError(ErrorType.REQUIRED, EMessage.NAME) }
     if (!surname) { return getError(ErrorType.REQUIRED, EMessage.SUR_NAME) }
     if (!email) { return getError(ErrorType.REQUIRED, EMessage.EMAIL) }
-    if (phone && !isPhone(phone)) { return getError(ErrorType.VALIDATION, EMessage.PHONE) }
+    if (!phone) { return getError(ErrorType.VALIDATION, EMessage.PHONE) }
+    // if (phone && !isPhone(phone)) { return getError(ErrorType.VALIDATION, EMessage.PHONE) }
     if (!isEmail(email)) { return getError(ErrorType.VALIDATION, EMessage.EMAIL) }
 
     return {
