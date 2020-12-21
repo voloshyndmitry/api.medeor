@@ -9,4 +9,5 @@ export interface Client {
     phone: string,
     email: string,
     photo: string,
+    tags: string[]
 }
