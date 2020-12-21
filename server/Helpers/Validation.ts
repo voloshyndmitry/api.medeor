@@ -54,7 +54,8 @@ export const clientValidation = (client: any): Client | IErrorMessage => {
         pregnancy = '',
         phone,
         email,
-        photo = ''
+        photo = '',
+        tags = []
     } = client;
 
     if (!name) { return getError(ErrorType.REQUIRED, EMessage.NAME) }
@@ -76,7 +77,8 @@ export const clientValidation = (client: any): Client | IErrorMessage => {
         pregnancy,
         phone,
         email,
-        photo
+        photo,
+        tags
     }
 }
 
