@@ -22,7 +22,7 @@ export class UserController {
         const { apiUrls: { login, user } } = this.constants;
         this.app.get(login, this.getUserId)
         this.app.get(user, this.autService.authenticateToken, this.getUserData)
-        this.app.post(user, this.autService.authenticateToken, this.addUser)
+        this.app.post(user, this.addUser)
         this.app.put(user, this.autService.authenticateToken, this.updateUser)
         this.app.delete(user, this.autService.authenticateToken, this.deleteUser)
     }
