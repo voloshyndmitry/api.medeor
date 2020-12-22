@@ -317,7 +317,7 @@
                 "tags": [
                     "Client Controller"
                 ],
-                "summary": "Update user",
+                "summary": "Update client",
                 "parameters": [
                     {
                         "in": "header",
@@ -330,81 +330,11 @@
                         }
                     },
                     {
-                        "in": "query",
-                        "name": "id",
+                        "in": "body",
+                        "name": "Client",
                         "required": true,
-                        "type": "string",
+                        "type": "json",
                         "description": "Test",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "name",
-                        "required": false,
-                        "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "surname",
-                        "required": false,
-                        "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "phone",
-                        "required": false,
-                        "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "location",
-                        "required": false,
-                        "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "pass",
-                        "required": false,
-                        "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "email",
-                        "required": false,
-                        "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "photo",
-                        "required": false,
-                        "type": "string",
-                        "description": "Qweqwe34",
                         "schema": {
                             "$ref": "#/definitions/userId"
                         }
