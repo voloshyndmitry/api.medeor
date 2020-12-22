@@ -1,5 +1,5 @@
 export interface Client {
-    doctorID?: string,
+    doctorId?: string,
     id?: string,
     name: string,
     surname: string,

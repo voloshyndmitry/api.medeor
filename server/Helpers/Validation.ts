@@ -46,7 +46,7 @@ const getError = (type: ErrorType, message: EMessage): IErrorMessage => {
 export const clientValidation = (client: any): Client | IErrorMessage => {
     const {
         id,
-        doctorID,
+        doctorId,
         name,
         surname,
         sex,
@@ -69,7 +69,7 @@ export const clientValidation = (client: any): Client | IErrorMessage => {
 
     return {
         id,
-        doctorID,
+        doctorId,
         name,
         surname,
         sex,

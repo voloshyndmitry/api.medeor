@@ -1,7 +1,7 @@
 import { AuthRequest } from './../Interfaces/Autorization';
 import { Application, Response } from 'express';
 import Constants from '../Constants';
-import { addClient, deleteClientById, getClientById, getClientsByDoctorId, updateClient } from '../DB/Clients';
+import { addClient, deleteClientById, getClientById, getClientsBydoctorId, updateClient } from '../DB/Clients';
 import { AuthorizeService } from '../Services/AuthorizeService';
 import { Client } from '../Interfaces/Clients';
 import { clientValidation } from '../Helpers/Validation';
@@ -29,7 +29,7 @@ export class ClientsController {
 
     private getClients = async (req: AuthRequest, res: Response) => {
         const { userId = '' } = req;
-        const clients: Client[] = await getClientsByDoctorId(userId)
+        const clients: Client[] = await getClientsBydoctorId(userId)
         if (clients?.length) {
             return res.json({ clients })
         }
@@ -46,18 +46,18 @@ export class ClientsController {
 
     private updateClient = async (req: AuthRequest, res: Response) => {
         const { body, userId = '' } = req;
-        const client: any = { ...body, doctorID: userId }
-        if (!client.error) {
+        const client: any = { ...body, doctorId: userId }
+        if (client.id) {
             const data = await updateClient(client as Client, userId);
             return res.json(data)
         }
 
-        return res.json(client || this.validationError)
+        return res.json(this.defaultError)
     }
 
     private addClient = async (req: AuthRequest, res: Response) => {
         const { body, userId = '' } = req;
-        const newClient = { ...body, doctorID: userId, id: new Date().getTime().toString() }
+        const newClient = { ...body, doctorId: userId, id: new Date().getTime().toString() }
         const client: any = clientValidation(newClient)
         if (!client.error) {
             const data = await addClient(client as Client)
