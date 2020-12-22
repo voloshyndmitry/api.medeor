@@ -15,7 +15,7 @@ const getClientsByDoctorId = async (id: string): Promise<Client[]> => {
 }
 
 const updateClient = async (updatedClient: Client, doctorID: string): Promise<Client[]> => {
-    const clients: Client[] = await getClientsByDoctorId(doctorID);
+    const clients: Client[] = await getAllClients();
     const data: Client[] = clients?.map?.((client: Client) => client.id === updatedClient.id ? { ...client, ...updatedClient } : client)
     await client.db("medeordb").collection("clients")
         .updateOne({}, { $set: { clients: data } });
