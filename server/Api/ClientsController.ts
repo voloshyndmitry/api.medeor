@@ -46,7 +46,8 @@ export class ClientsController {
 
     private updateClient = async (req: AuthRequest, res: Response) => {
         const { body, userId = '' } = req;
-        const client: any = clientValidation({ ...body, doctorID: userId })
+        const client: any = { ...body, doctorID: userId }
+        // const client: any = clientValidation({ ...body, doctorID: userId })
         if (!client.error) {
             const data = await updateClient(client as Client, userId);
             return res.json(data)
