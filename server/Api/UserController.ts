@@ -1,9 +1,9 @@
-import { User } from './../Interfaces/Users';
+import { User } from '../Interfaces/UsersInterface';
 import { Application, Request, Response } from 'express';
 import Constants from '../Constants';
 import MongoDb from '../DB/mongoConnect'
 import { AuthorizeService as AuthorizeService } from '../Services/AuthorizeService';
-import { addUser, deleteUserById, getUserDataById, updateUser } from '../DB/Users';
+import { addUser, deleteUserById, getUserDataById, updateUser } from '../DB/Users/UsersConnector';
 import { userValidation } from '../Helpers/Validation';
 
 

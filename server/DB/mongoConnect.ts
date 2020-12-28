@@ -1,5 +1,3 @@
-import { User } from "../Interfaces/Users";
-
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config()
 
@@ -13,7 +11,7 @@ const listDatabases = async () => {
     databasesList.databases.forEach((db: any) => console.log(` - ${db.name}`));
 };
 
-const listConnections = async () => {
+const listCollections = async () => {
     const collections = await client.db(process.env.DB_NAME).listCollections().toArray();
     console.log('collections: ', collections);
 };

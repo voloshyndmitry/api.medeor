@@ -23,7 +23,7 @@
                 "tags": [
                     "User Controller"
                 ],
-                "summary": "Get all users in system",
+                "summary": "Get user id in system",
                 "parameters": [
                     {
                         "in": "query",
@@ -61,7 +61,7 @@
                 "tags": [
                     "User Controller"
                 ],
-                "summary": "Get all users in system",
+                "summary": "Get user in system",
                 "parameters": [
                     {
                         "in": "query",
@@ -213,7 +213,7 @@
                 "tags": [
                     "User Controller"
                 ],
-                "summary": "Get all users in system",
+                "summary": "Add new user",
                 "parameters": [
                     {
                         "in": "body",
@@ -281,7 +281,7 @@
                 "tags": [
                     "Client Controller"
                 ],
-                "summary": "Get all users in system",
+                "summary": "Get client by id",
                 "parameters": [
                     {
                         "in": "query",
@@ -353,7 +353,7 @@
                 "tags": [
                     "Client Controller"
                 ],
-                "summary": "Get all users in system",
+                "summary": "Add new client",
                 "parameters": [
                     {
                         "in": "body",
@@ -383,7 +383,7 @@
                 "tags": [
                     "Client Controller"
                 ],
-                "summary": "Delete users by id in system",
+                "summary": "Delete client by id in system",
                 "parameters": [
                     {
                         "in": "body",
@@ -415,7 +415,7 @@
                 "tags": [
                     "Client Controller"
                 ],
-                "summary": "Get all users in system",
+                "summary": "Get all clients in system",
                 "parameters": [
                     {
                         "in": "header",
@@ -430,6 +430,45 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/clients"
+                        }
+                    }
+                }
+            }
+        },
+        "/testsGroups": {
+            "get": {
+                "tags": [
+                    "Tests Controller"
+                ],
+                "summary": "Get testsGroups by doctorId, clientId and date",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "doctorId",
+                        "required": true,
+                        "type": "string",
+                        "description": "Test"
+                    },
+                    {
+                        "in": "query",
+                        "name": "clientId",
+                        "required": false,
+                        "type": "string",
+                        "description": "Test"
+                    },
+                    {
+                        "in": "query",
+                        "name": "date",
+                        "required": false,
+                        "type": "string",
+                        "description": "Test"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userId"
                         }
                     }
                 }

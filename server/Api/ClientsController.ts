@@ -1,9 +1,9 @@
-import { AuthRequest } from './../Interfaces/Autorization';
+import { AuthRequest } from '../Interfaces/AutorizationInterface';
 import { Application, Response } from 'express';
 import Constants from '../Constants';
-import { addClient, deleteClientById, getClientById, getClientsBydoctorId, updateClient } from '../DB/Clients';
+import { addClient, deleteClientById, getClientById, getClientsBydoctorId, updateClient } from '../DB/Clients/ClientConnector';
 import { AuthorizeService } from '../Services/AuthorizeService';
-import { Client } from '../Interfaces/Clients';
+import { Client } from '../Interfaces/ClientsInterface';
 import { clientValidation } from '../Helpers/Validation';
 
 export class ClientsController {

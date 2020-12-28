@@ -1,4 +1,4 @@
-import { ITestsGroup } from './../../Interfaces/Tests';
+import { ITestsGroup } from '../../Interfaces/TestsInterface';
 import Mongo from '../mongoConnect';
 
 const { client } = Mongo;
@@ -11,9 +11,17 @@ const getAllTests = async (): Promise<ITestsGroup[]> => {
     return data
 }
 
-const getTestsByDoctorId = async (id: string): Promise<ITestsGroup[]> => {
+const getTestsByDoctorId = async (id: string, date?: string): Promise<ITestsGroup[]> => {
     const tests: ITestsGroup[] = await getAllTests();
     return tests.filter?.((test: ITestsGroup) => test.doctorId === String(id))
+}
+
+const getTestsGroupByClientId = async (doctorId: string, clientId: string, date: string): Promise<ITestsGroup[]> => {
+    const tests: ITestsGroup[] = await getTestsByDoctorId(doctorId, date)
+    if (clientId) {
+        return tests.filter((test) => test.clientId === clientId)
+    }
+    return tests
 }
 
 const updateTest = async (updatedTest: ITestsGroup, doctorId: string): Promise<ITestsGroup[]> => {
@@ -46,8 +54,9 @@ const getTestById = async (id: string, doctorId: string): Promise<ITestsGroup> =
 }
 
 export {
-    getTestById,
+    getAllTests,
     getTestsByDoctorId,
+    getTestsGroupByClientId,
     updateTest,
     addTest,
     deleteTestById

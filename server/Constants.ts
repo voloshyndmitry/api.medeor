@@ -1,21 +1,13 @@
-interface IApiUrls {
-    [id: string]: string
-}
-
-class Constants {
-    private readonly _apiUrls: IApiUrls = {
+export default {
+    apiUrls: {
         main: '/',
         user: '/user',
         login: '/login',
         client: '/client',
         clients: '/clients',
+        tests: '/tests',
+        testsGroups: '/testsGroups',
         getClients: '/getClients',
         getClient: '/getClient',
     }
-
-    get apiUrls() {
-        return this._apiUrls
-    }
 }
-
-export default new Constants;

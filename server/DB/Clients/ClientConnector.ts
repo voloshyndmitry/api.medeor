@@ -1,4 +1,4 @@
-import { Client } from './../../Interfaces/Clients';
+import { Client } from '../../Interfaces/ClientsInterface';
 import Mongo from '../mongoConnect';
 
 const { client } = Mongo;

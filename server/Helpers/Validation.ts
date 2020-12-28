@@ -1,5 +1,5 @@
-import { Client } from "../Interfaces/Clients";
-import { User } from "../Interfaces/Users";
+import { Client } from "../Interfaces/ClientsInterface";
+import { User } from "../Interfaces/UsersInterface";
 import isEmail from 'validator/lib/isEmail';
 import isPhone from 'validator/lib/isMobilePhone';
 

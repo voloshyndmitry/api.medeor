@@ -1,4 +1,4 @@
-import { AuthRequest } from './../Interfaces/Autorization';
+import { AuthRequest } from '../Interfaces/AutorizationInterface';
 import { Request, Response, NextFunction } from 'express';
 require('dotenv').config()
 const jwt = require("jsonwebtoken");

@@ -8,6 +8,7 @@ import swaggerUi from 'swagger-ui-express';
 import session from 'express-session';
 import { ClientsController } from "./Api/ClientsController";
 import MongoDb from './DB/mongoConnect'
+import { TestController } from "./Api/TestsController";
 require('dotenv').config()
 const swaggerDocument: { [name: string]: any } = require("../swagger.json");
 const isDev = process.env.ENV === 'dev';
@@ -40,6 +41,7 @@ app.use((err: string, req: Request, res: Response, next: NextFunction) => {
 new UserController(app)
 new MainController(app)
 new ClientsController(app)
+new TestController(app)
 
 MongoDb.connect();
 
