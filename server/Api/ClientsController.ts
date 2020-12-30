@@ -1,7 +1,7 @@
 import { AuthRequest } from '../Interfaces/AutorizationInterface';
 import { Application, Response } from 'express';
 import Constants from '../Constants';
-import { addClient, deleteClientById, getClientById, getClientsBydoctorId, updateClient } from '../DB/Clients/ClientConnector';
+import { addClient, deleteClientById, getClientById, getClientsByDoctorId, updateClient } from '../DB/Clients/ClientConnector';
 import { AuthorizeService } from '../Services/AuthorizeService';
 import { Client } from '../Interfaces/ClientsInterface';
 import { clientValidation } from '../Helpers/Validation';
@@ -29,7 +29,7 @@ export class ClientsController {
 
     private getClients = async (req: AuthRequest, res: Response) => {
         const { userId = '' } = req;
-        const clients: Client[] = await getClientsBydoctorId(userId)
+        const clients: Client[] = await getClientsByDoctorId(userId)
         if (clients?.length) {
             return res.json({ clients })
         }

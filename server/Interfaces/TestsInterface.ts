@@ -1,5 +1,6 @@
 export interface ITest {
-    id: string,
+    typeId: string,
+    id?: string,
     code: string,
     value?: string,
     refValue: IRefValue,
@@ -21,6 +22,7 @@ export interface ITranslation {
 }
 
 export interface ITestsGroup {
+    typeId: string,
     id: string,
     date: string,
     clientId?: string,

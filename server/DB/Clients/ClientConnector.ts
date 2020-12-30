@@ -11,7 +11,7 @@ const getAllClients = async (): Promise<Client[]> => {
     return clients
 }
 
-const getClientsBydoctorId = async (id: string): Promise<Client[]> => {
+const getClientsByDoctorId = async (id: string): Promise<Client[]> => {
     const clients: Client[] = await getAllClients();
     return clients.filter?.((user: Client) => user.doctorId === String(id))
 }
@@ -47,7 +47,7 @@ const getClientById = async (id: string, doctorId: string): Promise<Client> => {
 
 export {
     getClientById,
-    getClientsBydoctorId,
+    getClientsByDoctorId,
     updateClient,
     addClient,
     deleteClientById
