@@ -30,20 +30,14 @@
                         "name": "login",
                         "required": true,
                         "type": "string",
-                        "description": "Test",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Test"
                     },
                     {
                         "in": "query",
                         "name": "pass",
                         "required": true,
                         "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Qweqwe34"
                     }
                 ],
                 "responses": {
@@ -88,7 +82,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userData"
+                            "$ref": "#/definitions/User"
                         }
                     }
                 }
@@ -104,107 +98,77 @@
                         "name": "id",
                         "required": true,
                         "type": "string",
-                        "description": "Test",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Test"
                     },
                     {
                         "in": "query",
                         "name": "name",
                         "required": false,
                         "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Some name"
                     },
                     {
                         "in": "query",
                         "name": "surname",
                         "required": false,
                         "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Some surname"
                     },
                     {
                         "in": "query",
                         "name": "phone",
                         "required": false,
                         "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Your phone"
                     },
                     {
                         "in": "query",
                         "name": "location",
                         "required": false,
                         "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Your location"
                     },
                     {
                         "in": "query",
                         "name": "specialties",
                         "required": false,
                         "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Job title"
                     },
                     {
                         "in": "query",
                         "name": "pass",
                         "required": false,
                         "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Any strong pass"
                     },
                     {
                         "in": "query",
                         "name": "email",
                         "required": false,
                         "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Your email"
                     },
                     {
                         "in": "query",
                         "name": "photo",
                         "required": false,
                         "type": "string",
-                        "description": "Qweqwe34",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "Link to photo"
                     },
                     {
                         "in": "header",
                         "name": "authorization",
                         "required": true,
                         "type": "string",
-                        "description": "token",
-                        "schema": {
-                            "$ref": "#/definitions/userData"
-                        }
+                        "description": "token"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userId"
+                            "$ref": "#/definitions/User"
                         }
                     }
                 }
@@ -227,17 +191,14 @@
                         "name": "authorization",
                         "required": true,
                         "type": "string",
-                        "description": "token",
-                        "schema": {
-                            "$ref": "#/definitions/userData"
-                        }
+                        "description": "token"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userId"
+                            "$ref": "#/definitions/User"
                         }
                     }
                 }
@@ -260,17 +221,14 @@
                         "name": "authorization",
                         "required": true,
                         "type": "string",
-                        "description": "token",
-                        "schema": {
-                            "$ref": "#/definitions/userData"
-                        }
+                        "description": "token"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userData"
+                            "$ref": "#/definitions/User"
                         }
                     }
                 }
@@ -288,27 +246,21 @@
                         "name": "id",
                         "required": true,
                         "type": "string",
-                        "description": "1606760413563",
-                        "schema": {
-                            "$ref": "#/definitions/client"
-                        }
+                        "description": "1606760413563"
                     },
                     {
                         "in": "header",
                         "name": "authorization",
                         "required": true,
                         "type": "string",
-                        "description": "token",
-                        "schema": {
-                            "$ref": "#/definitions/userData"
-                        }
+                        "description": "token"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/client"
+                            "$ref": "#/definitions/Client"
                         }
                     }
                 }
@@ -324,19 +276,16 @@
                         "name": "authorization",
                         "required": true,
                         "type": "string",
-                        "description": "token",
-                        "schema": {
-                            "$ref": "#/definitions/userData"
-                        }
+                        "description": "token"
                     },
                     {
                         "in": "body",
                         "name": "Client",
                         "required": true,
                         "type": "json",
-                        "description": "Test",
+                        "description": "Client object",
                         "schema": {
-                            "$ref": "#/definitions/userId"
+                            "$ref": "#/definitions/Client"
                         }
                     }
                 ],
@@ -344,7 +293,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userId"
+                            "$ref": "#/definitions/Client"
                         }
                     }
                 }
@@ -357,10 +306,13 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "user",
+                        "name": "client",
                         "required": true,
                         "type": "object",
-                        "description": "User object that needs to be added to the collection"
+                        "description": "User object that needs to be added to the collection",
+                        "schema": {
+                            "$ref": "#/definitions/Client"
+                        }
                     },
                     {
                         "in": "header",
@@ -374,7 +326,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userId"
+                            "$ref": "#/definitions/Clients"
                         }
                     }
                 }
@@ -404,7 +356,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userData"
+                            "$ref": "#/definitions/Clients"
                         }
                     }
                 }
@@ -429,7 +381,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/clients"
+                            "$ref": "#/definitions/Clients"
                         }
                     }
                 }
@@ -466,17 +418,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/userId"
-                        }
+                        "description": "OK"
                     }
                 }
             }
         }
     },
     "definitions": {
-        "client": {
+        "Client": {
             "properties": {
                 "doctorId": {
                     "type": "string"
@@ -510,41 +459,12 @@
                 }
             }
         },
-        "clients": {
+        "Clients": {
             "properties": {
-                "clients": {
-                    "type": "object",
-                    "properties": {
-                        "doctorId": {
-                            "type": "string"
-                        },
-                        "id": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "surname": {
-                            "type": "string"
-                        },
-                        "sex": {
-                            "type": "string"
-                        },
-                        "age": {
-                            "type": "string"
-                        },
-                        "pregnancy": {
-                            "type": "string"
-                        },
-                        "phone": {
-                            "type": "string"
-                        },
-                        "email": {
-                            "type": "string"
-                        },
-                        "photo": {
-                            "type": "string"
-                        }
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Client"
                     }
                 }
             }
@@ -559,7 +479,7 @@
                 }
             }
         },
-        "userData": {
+        "User": {
             "properties": {
                 "id": {
                     "type": "string"
@@ -586,7 +506,9 @@
         },
         "Users": {
             "type": "array",
-            "$ref": "#/definitions/User"
+            "items": {
+                "$ref": "#/definitions/User"
+            }
         }
     },
     "schemes": [
