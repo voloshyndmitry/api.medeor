@@ -16,12 +16,15 @@ const getClientsByDoctorId = async (id: string): Promise<Client[]> => {
     return clients.filter?.((user: Client) => user.doctorId === String(id))
 }
 
-const updateClient = async (updatedClient: Client, doctorId: string): Promise<Client[]> => {
+const updateClient = async (updatedClient: Client, doctorId: string): Promise<Client | undefined> => {
     const clients: Client[] = await getAllClients();
-    const data: Client[] = clients?.map?.((client: Client) => client.id === updatedClient.id ? { ...client, ...updatedClient } : client)
+    const data: Client[] = clients?.map?.(
+        (client: Client) => client.id === updatedClient.id && client.doctorId === doctorId ?
+            { ...client, ...updatedClient } :
+            client)
     await client.db(dbName).collection(collection)
         .updateOne({}, { $set: { clients: data } });
-    return data.filter(client => client.doctorId === doctorId);
+    return data.find(client => client.id === updatedClient.id);
 }
 
 const addClient = async (data: Client): Promise<Client> => {
