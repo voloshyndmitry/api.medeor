@@ -1,5 +1,8 @@
+import { ITest } from './../../Interfaces/TestsInterface';
 import { ITestsGroup } from '../../Interfaces/TestsInterface';
 import Mongo from '../mongoConnect';
+import { getAllGroupTemplates } from '../Templates/TestsGroupTemplateConnector';
+import { getAllTestTemplates } from '../Templates/TestsTemplateConnector';
 
 const { client } = Mongo;
 const dbName = 'medeordb';
@@ -11,9 +14,27 @@ const getAllTests = async (): Promise<ITestsGroup[]> => {
     return data
 }
 
+const getTemplateByTypeId = (templates: any[], typeId: string) => {
+    return templates?.find?.((template: ITestsGroup | ITest) => template.typeId === typeId)
+}
+
 const getTestsByDoctorId = async (id: string, date?: string): Promise<ITestsGroup[]> => {
     const tests: ITestsGroup[] = await getAllTests();
-    return tests.filter?.((test: ITestsGroup) => test.doctorId === String(id))
+    const groupTemplates: ITestsGroup[] = await getAllGroupTemplates();
+    const testTemplates: ITest[] = await getAllTestTemplates();
+    const selectedTests: ITestsGroup[] = tests.filter?.((test: ITestsGroup) => test.doctorId === String(id))
+    const updatedTests: ITestsGroup[] = selectedTests.map((test: ITestsGroup) => {
+        const template: ITestsGroup = getTemplateByTypeId(groupTemplates, test.typeId) || test;
+        return {
+            ...template,
+            ...test,
+            tests: test?.tests?.map?.((test: ITest) => {
+                const testTemplate: ITest = getTemplateByTypeId(testTemplates, test?.typeId)
+                return { ...testTemplate, ...test }
+            }) || []
+        }
+    })
+    return updatedTests
 }
 
 const getTestsGroupByClientId = async (doctorId: string, clientId: string, date: string): Promise<ITestsGroup[]> => {

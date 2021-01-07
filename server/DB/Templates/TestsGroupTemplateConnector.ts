@@ -3,12 +3,17 @@ import Mongo from '../mongoConnect';
 
 const { client } = Mongo;
 const dbName = 'medeordb';
-const collection = 'testsGroupsTemplate';
+const collection = 'testsGroupTemplate';
 
 const getAllGroupTemplates = async (): Promise<ITestsGroup[]> => {
     const { data } = await client.db(dbName).collection(collection)
         .findOne()
     return data
+}
+
+const getTemplateByTypeId = async (typeId: string): Promise<ITestsGroup | undefined> => {
+    const templates: ITestsGroup[] = await getAllGroupTemplates();
+    return templates.find((template: ITestsGroup) => template.typeId === typeId)
 }
 
 const addTestGroupTemplate = async (template: ITestsGroup): Promise<ITestsGroup[]> => {
@@ -40,6 +45,7 @@ const deleteTestTemplate = async (typeId: string): Promise<ITestsGroup[]> => {
 
 export {
     getAllGroupTemplates,
+    getTemplateByTypeId,
     addTestGroupTemplate,
     updateTestTemplate,
     deleteTestTemplate
