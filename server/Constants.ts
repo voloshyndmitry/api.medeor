@@ -6,9 +6,9 @@ export default {
         client: '/client',
         clients: '/clients',
         tests: '/tests',
-        testsTemplates: '/testsTemplates',
+        testTemplates: '/testTemplates',
         testsGroups: '/testsGroups',
-        testsGroupsTemplates: '/testsGroupsTemplates',
+        testGroupTemplates: '/testGroupTemplates',
         getClients: '/getClients',
         getClient: '/getClient',
     }

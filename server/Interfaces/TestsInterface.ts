@@ -1,12 +1,14 @@
+import { IErrorMessage } from "../Helpers/Validation";
+
 export interface ITest {
     typeId: string,
     id?: string,
-    code: string,
-    value?: string,
-    refValue: IRefValue,
-    title: ITranslation,
+    code?: string,
+    value: string,
+    refValue?: IRefValue,
+    title?: ITranslation,
     description?: ITranslation,
-    unit: ITranslation,
+    unit?: ITranslation,
 }
 
 interface IRefValue {
@@ -27,9 +29,10 @@ export interface ITestsGroup {
     date: string,
     clientId?: string,
     doctorId?: string,
-    name: ITranslation,
+    name?: ITranslation,
     description?: ITranslation,
-    tests: ITest[]
+    tests: ITest[],
+    error?: IErrorMessage
 }
 
 //Example data

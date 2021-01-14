@@ -1,11 +1,13 @@
+import { testGroupValidation } from './../Helpers/Validation';
 import Constants from '../Constants';
 import { Application, Response } from 'express';
 import { AuthorizeService as AuthorizeService } from '../Services/AuthorizeService';
 import { AuthRequest } from '../Interfaces/AutorizationInterface';
-import { getTestsGroupByClientId } from '../DB/Tests/TestsConnector';
+import { addTest, getTestsGroupByClientId } from '../DB/Tests/TestsConnector';
 import { ITest, ITestsGroup } from '../Interfaces/TestsInterface';
-import { getAllTestTemplates } from '../DB/Templates/TestsTemplateConnector';
+import { addTestTemplate, deleteTestTemplate, getAllTestTemplates } from '../DB/Templates/TestsTemplateConnector';
 import { getAllGroupTemplates } from '../DB/Templates/TestsGroupTemplateConnector';
+import { testTemplateFormatting } from '../Helpers/DataFormating';
 
 
 export class TestController {
@@ -18,13 +20,15 @@ export class TestController {
     }
 
     private setRequestHandlers() {
-        const { apiUrls: { tests, testsGroups, testsTemplates, testsGroupsTemplates } } = Constants;
+        const { apiUrls: { tests, testsGroups, testTemplates, testGroupTemplates } } = Constants;
         // this.app.get(tests, this.getTestsGroupByClientId)
         this.app.get(testsGroups, this.getTestsGroupByClientId)
-        this.app.get(testsTemplates, this.getAllTestTemplates)
-        this.app.get(testsGroupsTemplates, this.getTestsGroupTemplates)
+        this.app.get(testTemplates, this.getAllTestTemplates)
+        this.app.post(testTemplates, this.addTestTemplate)
+        this.app.delete(testTemplates, this.deleteTestTemplate)
+        this.app.get(testGroupTemplates, this.getTestGroupTemplates)
         // this.app.put(testsGroups, this.getTestsGroupByClientId)
-        // this.app.post(testsGroups, this.getTestsGroupByClientId)
+        this.app.post(testsGroups, this.createTestGroup)
         // this.app.delete(testsGroups, this.getTestsGroupByClientId)
     }
 
@@ -33,23 +37,40 @@ export class TestController {
 
         const testsGroups: ITestsGroup[] = await getTestsGroupByClientId(String(userId), String(clientId), String(date))
         return res.json(testsGroups?.length ? { data: testsGroups } : this.defaultError)
-
     }
 
     private getAllTestTemplates = async (req: AuthRequest, res: Response) => {
 
-        const testsTemplates: ITest[] = await getAllTestTemplates()
-        return res.json(testsTemplates?.length ? { data: testsTemplates } : this.defaultError)
-
+        const testTemplates: ITest[] = await getAllTestTemplates()
+        return res.json(testTemplates?.length ? { data: testTemplates } : this.defaultError)
     }
 
-    private getTestsGroupTemplates = async (req: AuthRequest, res: Response) => {
+    private addTestTemplate = async (req: AuthRequest, res: Response) => {
+        const { body } = req;
+        const testTemplate: ITest = testTemplateFormatting(body);
+        const testTemplates: ITest[] = await addTestTemplate(testTemplate)
+        return res.json(testTemplates?.length ? { data: testTemplates } : this.defaultError)
+    }
+
+    private deleteTestTemplate = async (req: AuthRequest, res: Response) => {
+        const { query: { typeId = '' } } = req;
+
+        const testTemplates: ITest[] = await deleteTestTemplate(String(typeId))
+        return res.json(testTemplates?.length ? { data: testTemplates } : this.defaultError)
+    }
+
+    private getTestGroupTemplates = async (req: AuthRequest, res: Response) => {
 
         const testsGroupTemplates: ITestsGroup[] = await getAllGroupTemplates()
         return res.json(testsGroupTemplates?.length ? { data: testsGroupTemplates } : this.defaultError)
-
     }
 
-    private generateTestId = (): string => new Date().getTime().toString();
-
+    private createTestGroup = async (req: AuthRequest, res: Response) => {
+        const { body } = req;
+        const test = testGroupValidation(body);
+        if (test.error) {
+            return res.json(test)
+        }
+        return await addTest(test as ITestsGroup);
+    }
 }

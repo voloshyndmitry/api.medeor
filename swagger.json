@@ -422,6 +422,74 @@
                     }
                 }
             }
+        },
+        "/testTemplates": {
+            "get": {
+                "tags": [
+                    "Tests Controller"
+                ],
+                "summary": "Get testsGroups by doctorId, clientId and date",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tests Controller"
+                ],
+                "summary": "Get testsGroups by doctorId, clientId and date",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "required": true,
+                        "type": "object",
+                        "description": "testTemplate"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tests Controller"
+                ],
+                "summary": "Get testsGroups by doctorId, clientId and date",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "typeId",
+                        "required": true,
+                        "type": "string",
+                        "description": "typeId of test template"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/testGroupTemplates": {
+            "get": {
+                "tags": [
+                    "Tests Controller"
+                ],
+                "summary": "Get testsGroups by doctorId, clientId and date",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     },
     "definitions": {
