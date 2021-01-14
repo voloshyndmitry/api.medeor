@@ -11,7 +11,7 @@ export const testTemplateFormatting = (data: any): ITest => {
     } = data;
 
     return {
-        typeId,
+        typeId: `${code}${new Date().getTime().toString()}`,
         id: '',
         code,
         value: '',
