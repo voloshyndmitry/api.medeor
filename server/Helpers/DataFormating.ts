@@ -1,3 +1,4 @@
+import { ITestsGroup } from './../Interfaces/TestsInterface';
 import { ITest } from "../Interfaces/TestsInterface";
 
 export const testTemplateFormatting = (data: any): ITest => {
@@ -19,6 +20,25 @@ export const testTemplateFormatting = (data: any): ITest => {
         title,
         description,
         unit
+    }
+
+}
+export const testGroupTemplateFormatting = (data: any): ITestsGroup => {
+    const {
+        name,
+        description,
+        tests
+    } = data;
+
+    return {
+        typeId: new Date().getTime().toString(),
+        id: '',
+        date: '',
+        clientId: '',
+        doctorId: '',
+        name,
+        description,
+        tests: tests.map(({ typeId }: ITest) => { typeId })
     }
 
 }

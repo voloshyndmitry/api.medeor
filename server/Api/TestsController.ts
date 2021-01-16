@@ -6,8 +6,8 @@ import { AuthRequest } from '../Interfaces/AutorizationInterface';
 import { addTest, getTestsGroupByClientId } from '../DB/Tests/TestsConnector';
 import { ITest, ITestsGroup } from '../Interfaces/TestsInterface';
 import { addTestTemplate, deleteTestTemplate, getAllTestTemplates } from '../DB/Templates/TestsTemplateConnector';
-import { getAllGroupTemplates } from '../DB/Templates/TestsGroupTemplateConnector';
-import { testTemplateFormatting } from '../Helpers/DataFormating';
+import { addTestGroupTemplate, getAllGroupTemplates } from '../DB/Templates/TestsGroupTemplateConnector';
+import { testGroupTemplateFormatting, testTemplateFormatting } from '../Helpers/DataFormating';
 
 
 export class TestController {
@@ -27,6 +27,7 @@ export class TestController {
         this.app.post(testTemplates, this.addTestTemplate)
         this.app.delete(testTemplates, this.deleteTestTemplate)
         this.app.get(testGroupTemplates, this.getTestGroupTemplates)
+        this.app.post(testGroupTemplates, this.addTestGroupTemplates)
         // this.app.put(testsGroups, this.getTestsGroupByClientId)
         this.app.post(testsGroups, this.createTestGroup)
         // this.app.delete(testsGroups, this.getTestsGroupByClientId)
@@ -63,6 +64,13 @@ export class TestController {
 
         const testsGroupTemplates: ITestsGroup[] = await getAllGroupTemplates()
         return res.json(testsGroupTemplates?.length ? { data: testsGroupTemplates } : this.defaultError)
+    }
+
+    private addTestGroupTemplates = async (req: AuthRequest, res: Response) => {
+        const { body } = req;
+        const testGroupTemplate: ITestsGroup = testGroupTemplateFormatting(body)
+        const testGroupTemplates: ITestsGroup[] = await addTestGroupTemplate(testGroupTemplate)
+        return testGroupTemplates
     }
 
     private createTestGroup = async (req: AuthRequest, res: Response) => {
