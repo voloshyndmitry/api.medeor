@@ -18,7 +18,7 @@ const getTemplateByTypeId = async (typeId: string): Promise<ITestsGroup | undefi
 
 const addTestGroupTemplate = async (template: ITestsGroup): Promise<ITestsGroup[]> => {
     const data = await getAllGroupTemplates();
-    console.log('template--->', template)
+
     const newTests = [...data, template]
     await client.db(dbName).collection(collection)
         .updateOne({}, { $set: { data: newTests } });
