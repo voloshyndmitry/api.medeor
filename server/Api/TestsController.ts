@@ -6,7 +6,7 @@ import { AuthRequest } from '../Interfaces/AutorizationInterface';
 import { addTest, getTestsGroupByClientId } from '../DB/Tests/TestsConnector';
 import { ITest, ITestsGroup } from '../Interfaces/TestsInterface';
 import { addTestTemplate, deleteTestTemplate, getAllTestTemplates } from '../DB/Templates/TestsTemplateConnector';
-import { addTestGroupTemplate, getAllGroupTemplates } from '../DB/Templates/TestsGroupTemplateConnector';
+import { addTestGroupTemplate, deleteTestGroupTemplate, getAllGroupTemplates } from '../DB/Templates/TestsGroupTemplateConnector';
 import { testGroupTemplateFormatting, testTemplateFormatting } from '../Helpers/DataFormating';
 
 
@@ -23,14 +23,17 @@ export class TestController {
         const { apiUrls: { tests, testsGroups, testTemplates, testGroupTemplates } } = Constants;
         // this.app.get(tests, this.getTestsGroupByClientId)
         this.app.get(testsGroups, this.getTestsGroupByClientId)
+
+        // TestTemplates:
         this.app.get(testTemplates, this.getAllTestTemplates)
         this.app.post(testTemplates, this.addTestTemplate)
         this.app.delete(testTemplates, this.deleteTestTemplate)
+
+        // TestGroupTemplates:
         this.app.get(testGroupTemplates, this.getTestGroupTemplates)
         this.app.post(testGroupTemplates, this.addTestGroupTemplates)
-        // this.app.put(testsGroups, this.getTestsGroupByClientId)
+        this.app.delete(testGroupTemplates, this.deleteTestGroupTemplates)
         this.app.post(testsGroups, this.createTestGroup)
-        // this.app.delete(testsGroups, this.getTestsGroupByClientId)
     }
 
     private getTestsGroupByClientId = async (req: AuthRequest, res: Response) => {
@@ -70,7 +73,14 @@ export class TestController {
         const { body } = req;
         const testGroupTemplate: ITestsGroup = testGroupTemplateFormatting(body)
         const testGroupTemplates: ITestsGroup[] = await addTestGroupTemplate(testGroupTemplate)
-        return testGroupTemplates
+        res.json(testGroupTemplates)
+    }
+
+    private deleteTestGroupTemplates = async (req: AuthRequest, res: Response) => {
+        const { query: { typeId = '' } } = req;
+
+        const testGroupTemplates: ITestsGroup[] = await deleteTestGroupTemplate(String(typeId))
+        return res.json(testGroupTemplates?.length ? { data: testGroupTemplates } : this.defaultError)
     }
 
     private createTestGroup = async (req: AuthRequest, res: Response) => {

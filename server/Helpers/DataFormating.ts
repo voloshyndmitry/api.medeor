@@ -38,7 +38,7 @@ export const testGroupTemplateFormatting = (data: any): ITestsGroup => {
         doctorId: '',
         name,
         description,
-        tests: tests.map(({ typeId }: ITest) => { typeId })
+        tests: tests.map(({ typeId }: ITest) => ({ typeId })).filter((test: ITest) => test)
     }
 
 }

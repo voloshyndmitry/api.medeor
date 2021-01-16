@@ -372,7 +372,7 @@
                 "tags": [
                     "Tests Controller"
                 ],
-                "summary": "Get testsGroups by doctorId, clientId and date",
+                "summary": "Get all testTemplates",
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -384,7 +384,7 @@
                 "tags": [
                     "Tests Controller"
                 ],
-                "summary": "Get testsGroups by doctorId, clientId and date",
+                "summary": "ADd testTemplate",
                 "parameters": [
                     {
                         "in": "body",
@@ -404,7 +404,7 @@
                 "tags": [
                     "Tests Controller"
                 ],
-                "summary": "Get testsGroups by doctorId, clientId and date",
+                "summary": "Remove testTemplates by typeId",
                 "parameters": [
                     {
                         "in": "query",
@@ -426,8 +426,48 @@
                 "tags": [
                     "Tests Controller"
                 ],
-                "summary": "Get testsGroups by doctorId, clientId and date",
+                "summary": "Get all testGroupTemplates",
                 "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tests Controller"
+                ],
+                "summary": "Add testGroupTemplate",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "required": true,
+                        "type": "object",
+                        "description": "testTemplate"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tests Controller"
+                ],
+                "summary": "Remove testGroupTemplate by typeId",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "typeId",
+                        "required": true,
+                        "type": "string",
+                        "description": "typeId of test template"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"

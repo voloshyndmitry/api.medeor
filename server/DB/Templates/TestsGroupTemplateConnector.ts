@@ -18,6 +18,7 @@ const getTemplateByTypeId = async (typeId: string): Promise<ITestsGroup | undefi
 
 const addTestGroupTemplate = async (template: ITestsGroup): Promise<ITestsGroup[]> => {
     const data = await getAllGroupTemplates();
+    console.log('template--->', template)
     const newTests = [...data, template]
     await client.db(dbName).collection(collection)
         .updateOne({}, { $set: { data: newTests } });
@@ -25,7 +26,7 @@ const addTestGroupTemplate = async (template: ITestsGroup): Promise<ITestsGroup[
     return newTests
 }
 
-const updateTestTemplate = async (template: ITestsGroup): Promise<ITestsGroup[]> => {
+const updateTestGroupTemplate = async (template: ITestsGroup): Promise<ITestsGroup[]> => {
     const data: ITestsGroup[] = await getAllGroupTemplates();
     const newTests: ITestsGroup[] = data.map((test: ITestsGroup) => test.typeId === template.typeId ? { ...test, ...template } : test);
     await client.db(dbName).collection(collection)
@@ -34,7 +35,7 @@ const updateTestTemplate = async (template: ITestsGroup): Promise<ITestsGroup[]>
     return newTests
 }
 
-const deleteTestTemplate = async (typeId: string): Promise<ITestsGroup[]> => {
+const deleteTestGroupTemplate = async (typeId: string): Promise<ITestsGroup[]> => {
     const data: ITestsGroup[] = await getAllGroupTemplates();
     const newTests = data.filter((test: ITestsGroup) => test.typeId !== typeId);
     await client.db(dbName).collection(collection)
@@ -47,6 +48,6 @@ export {
     getAllGroupTemplates,
     getTemplateByTypeId,
     addTestGroupTemplate,
-    updateTestTemplate,
-    deleteTestTemplate
+    updateTestGroupTemplate,
+    deleteTestGroupTemplate
 }
