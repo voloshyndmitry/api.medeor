@@ -94,67 +94,11 @@
                 "summary": "Update user",
                 "parameters": [
                     {
-                        "in": "query",
-                        "name": "id",
+                        "in": "body",
+                        "name": "user",
                         "required": true,
-                        "type": "string",
-                        "description": "Test"
-                    },
-                    {
-                        "in": "query",
-                        "name": "name",
-                        "required": false,
-                        "type": "string",
-                        "description": "Some name"
-                    },
-                    {
-                        "in": "query",
-                        "name": "surname",
-                        "required": false,
-                        "type": "string",
-                        "description": "Some surname"
-                    },
-                    {
-                        "in": "query",
-                        "name": "phone",
-                        "required": false,
-                        "type": "string",
-                        "description": "Your phone"
-                    },
-                    {
-                        "in": "query",
-                        "name": "location",
-                        "required": false,
-                        "type": "string",
-                        "description": "Your location"
-                    },
-                    {
-                        "in": "query",
-                        "name": "specialties",
-                        "required": false,
-                        "type": "string",
-                        "description": "Job title"
-                    },
-                    {
-                        "in": "query",
-                        "name": "pass",
-                        "required": false,
-                        "type": "string",
-                        "description": "Any strong pass"
-                    },
-                    {
-                        "in": "query",
-                        "name": "email",
-                        "required": false,
-                        "type": "string",
-                        "description": "Your email"
-                    },
-                    {
-                        "in": "query",
-                        "name": "photo",
-                        "required": false,
-                        "type": "string",
-                        "description": "Link to photo"
+                        "type": "object",
+                        "description": "User object that needs to be added to the collection"
                     },
                     {
                         "in": "header",

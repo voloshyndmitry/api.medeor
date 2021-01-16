@@ -165,3 +165,16 @@ export const userValidation = (user: User) => {
         pass,
     }
 }
+
+export const editUserValidation = (user: User) => {
+    const {
+        id,
+        email,
+    } = user;
+
+    if (!id) { return getError(ErrorType.REQUIRED, EMessage.ID) }
+    // if (phone && !isPhone(phone)) { return getError(ErrorType.VALIDATION, EMessage.PHONE) }
+    if (email && !isEmail(email)) { return getError(ErrorType.VALIDATION, EMessage.EMAIL) }
+
+    return user
+}

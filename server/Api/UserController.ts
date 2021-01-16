@@ -4,7 +4,7 @@ import Constants from '../Constants';
 import MongoDb from '../DB/mongoConnect'
 import { AuthorizeService as AuthorizeService } from '../Services/AuthorizeService';
 import { addUser, deleteUserById, getUserDataById, updateUser } from '../DB/Users/UsersConnector';
-import { userValidation } from '../Helpers/Validation';
+import { editUserValidation, userValidation } from '../Helpers/Validation';
 
 
 export class UserController {
@@ -74,7 +74,8 @@ export class UserController {
 
     private updateUser = async (req: Request, res: Response) => {
         const { body } = req;
-        const user: any = userValidation(body)
+
+        const user: any = editUserValidation(body)
         if (!user.error) {
 
             const result = await updateUser(user as User)

@@ -69,10 +69,10 @@ const updateUser = async (user: User) => {
         }
         return user
     })
-
-    await client.db(dbName).collection(usersCollection)
-        .updateOne({}, { $set: { data: updatedUsers } });
-    return user
+    console.log("--->", updatedUsers)
+    // await client.db(dbName).collection(usersCollection)
+    //     .updateOne({}, { $set: { data: updatedUsers } });
+    return updatedUsers.find(({ id }: User) => id === user.id)
 }
 
 export {
