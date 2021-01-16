@@ -75,7 +75,7 @@ export class UserController {
     private updateUser = async (req: Request, res: Response) => {
         const { body } = req;
         const user: any = userValidation(body)
-        if (user.error) {
+        if (!user.error) {
 
             const result = await updateUser(user as User)
             return res.json(result)
