@@ -42,8 +42,8 @@ export class UserController {
         const { query: { id } } = req;
         const user = await getUserDataById(String(id))
 
-        if (!user.error) {
-            return res.json(user)
+        if (!user?.error) {
+            return res.json(user || this.defaultError)
         }
         res.json(this.defaultError)
     }
@@ -63,9 +63,9 @@ export class UserController {
     private addUser = async (req: Request, res: Response) => {
         const { body } = req;
         const user: any = userValidation(body)
-        if (!user.error) {
-            body.id = this.generateUserId()
-            const result = await addUser(body)
+        if (!user?.error) {
+            user.id = this.generateUserId()
+            const result = await addUser(user)
 
             return res.json(result)
         }
