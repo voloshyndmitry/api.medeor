@@ -117,6 +117,36 @@
                     }
                 }
             },
+            "patch": {
+                "tags": [
+                    "User Controller"
+                ],
+                "summary": "Update user",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "user",
+                        "required": true,
+                        "type": "object",
+                        "description": "User object that needs to be added to the collection"
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "User Controller"

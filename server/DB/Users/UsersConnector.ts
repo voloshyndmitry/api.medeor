@@ -1,4 +1,4 @@
-import { User } from '../../Interfaces/UsersInterface';
+import { User, UserAutData } from '../../Interfaces/UsersInterface';
 import Mongo from '../mongoConnect';
 
 const { client } = Mongo;
@@ -30,8 +30,7 @@ const getAllAuthData = async () => {
 }
 
 const addUser = async (user: User) => {
-    const { data: userIds } = await client.db(dbName).collection(autDataCollection)
-        .findOne()
+    const { data: userIds } = await getAllAuthData();
     const { data } = await getAllUsers();
     await client.db(dbName).collection(autDataCollection)
         .updateOne({}, { $set: { data: [...userIds, { login: user.email, pass: user.pass, id: user.id }] } });
@@ -55,7 +54,6 @@ const deleteUserById = async (id: string) => {
     return users
 }
 
-
 const getAllUsers = async () => {
     return client.db(dbName).collection(usersCollection)
         .findOne()
@@ -67,10 +65,30 @@ const updateUser = async (user: User) => {
         if (item.id === user.id) {
             return { ...item, ...user }
         }
-        return user
-    })
+        return item
+    });
+
+    if (user.email || user.pass) {
+        const { data: userIds } = await getAllAuthData();
+
+        const newUserIds = userIds.map((item: UserAutData) => {
+            if (item.id === user.id) {
+                return {
+                    ...item,
+                    pass: user.pass || item.pass,
+                    login: user.email || item.login
+                };
+            }
+
+            return item;
+        });
+        await client.db(dbName).collection(autDataCollection)
+            .updateOne({}, { $set: { data: newUserIds } });
+    }
+
     await client.db(dbName).collection(usersCollection)
         .updateOne({}, { $set: { data: updatedUsers } });
+
     return updatedUsers.find(({ id }: User) => id === user.id)
 }
 

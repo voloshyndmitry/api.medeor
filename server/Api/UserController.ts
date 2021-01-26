@@ -24,6 +24,7 @@ export class UserController {
         this.app.get(user, this.autService.authenticateToken, this.getUserData)
         this.app.post(user, this.addUser)
         this.app.put(user, this.autService.authenticateToken, this.updateUser)
+        this.app.patch(user, this.autService.authenticateToken, this.updateUser)
         this.app.delete(user, this.autService.authenticateToken, this.deleteUser)
     }
 

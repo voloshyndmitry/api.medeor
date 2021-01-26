@@ -9,3 +9,5 @@ export interface User {
     specialties?: string,
     photo?: string
 }
+
+export interface UserAutData { login: string, pass: string, id: string }
