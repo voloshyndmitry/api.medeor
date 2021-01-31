@@ -37,9 +37,9 @@ export class TestController {
     }
 
     private getTestsGroupByClientId = async (req: AuthRequest, res: Response) => {
-        const { query: { clientId = '', date = '' }, userId = '1606760413563' } = req;
+        const { query: { clientId = '', date = '', doctorId = '' }, userId = '' } = req;
 
-        const testsGroups: ITestsGroup[] = await getTestsGroupByClientId(String(userId), String(clientId), String(date))
+        const testsGroups: ITestsGroup[] = await getTestsGroupByClientId(String(doctorId), String(clientId), String(date))
         return res.json(testsGroups?.length ? { data: testsGroups } : this.defaultError)
     }
 

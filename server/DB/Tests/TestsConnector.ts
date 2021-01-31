@@ -8,7 +8,7 @@ const { client } = Mongo;
 const dbName = 'medeordb';
 const collection = 'testsGroup';
 
-const getAllTests = async (): Promise<ITestsGroup[]> => {
+const getAllTestGroups = async (): Promise<ITestsGroup[]> => {
     const { data } = await client.db(dbName).collection(collection)
         .findOne()
     return data
@@ -19,7 +19,7 @@ const getTemplateByTypeId = (templates: any[], typeId: string) => {
 }
 
 const getTestsByDoctorId = async (id: string, date?: string): Promise<ITestsGroup[]> => {
-    const tests: ITestsGroup[] = await getAllTests();
+    const tests: ITestsGroup[] = await getAllTestGroups();
     const groupTemplates: ITestsGroup[] = await getAllGroupTemplates();
     const testTemplates: ITest[] = await getAllTestTemplates();
     const selectedTests: ITestsGroup[] = tests.filter?.((test: ITestsGroup) => test.doctorId === String(id))
@@ -46,7 +46,7 @@ const getTestsGroupByClientId = async (doctorId: string, clientId: string, date:
 }
 
 const updateTest = async (updatedTest: ITestsGroup, doctorId: string): Promise<ITestsGroup[]> => {
-    const tests: ITestsGroup[] = await getAllTests();
+    const tests: ITestsGroup[] = await getAllTestGroups();
     const data: ITestsGroup[] = tests?.map?.((test: ITestsGroup) => test.id === updatedTest.id ? { ...test, ...updatedTest } : client)
     await client.db(dbName).collection(collection)
         .updateOne({}, { $set: { data } });
@@ -54,14 +54,14 @@ const updateTest = async (updatedTest: ITestsGroup, doctorId: string): Promise<I
 }
 
 const addTest = async (data: ITestsGroup): Promise<ITestsGroup> => {
-    const tests: ITestsGroup[] = await getAllTests();
+    const tests: ITestsGroup[] = await getAllTestGroups();
     await client.db(dbName).collection(collection)
         .updateOne({}, { $set: { data: [...tests, data] } });
     return data;
 }
 
 const deleteTestById = async (id: string, doctorId: string): Promise<ITestsGroup[]> => {
-    const tests: ITestsGroup[] = await getAllTests();
+    const tests: ITestsGroup[] = await getAllTestGroups();
     const data: ITestsGroup[] = tests?.filter?.((data: ITestsGroup) => data.id !== id && data.doctorId === doctorId)
     await client.db(dbName).collection(collection)
         .updateOne({}, { $set: { data } });
@@ -75,7 +75,7 @@ const getTestById = async (id: string, doctorId: string): Promise<ITestsGroup> =
 }
 
 export {
-    getAllTests,
+    getAllTestGroups,
     getTestsByDoctorId,
     getTestsGroupByClientId,
     updateTest,
