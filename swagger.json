@@ -98,7 +98,10 @@
                         "name": "user",
                         "required": true,
                         "type": "object",
-                        "description": "User object that needs to be added to the collection"
+                        "description": "User object that needs to be added to the collection",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
                     },
                     {
                         "in": "header",
@@ -128,7 +131,10 @@
                         "name": "user",
                         "required": true,
                         "type": "object",
-                        "description": "User object that needs to be added to the collection"
+                        "description": "User object that needs to be added to the collection",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
                     },
                     {
                         "in": "header",
@@ -158,7 +164,10 @@
                         "name": "user",
                         "required": true,
                         "type": "object",
-                        "description": "User object that needs to be added to the collection"
+                        "description": "User object that needs to be added to the collection",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
                     },
                     {
                         "in": "header",
@@ -300,7 +309,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Clients"
+                            "$ref": "#/definitions/Client"
                         }
                     }
                 }
@@ -392,7 +401,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TestGroups"
+                        }
                     }
                 }
             }
@@ -406,7 +418,10 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Tests"
+                        }
                     }
                 }
             },
@@ -414,19 +429,25 @@
                 "tags": [
                     "Tests Controller"
                 ],
-                "summary": "ADd testTemplate",
+                "summary": "Add testTemplate",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "data",
                         "required": true,
                         "type": "object",
-                        "description": "testTemplate"
+                        "description": "testTemplate",
+                        "schema": {
+                            "$ref": "#/definitions/Test"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Test"
+                        }
                     }
                 }
             },
@@ -446,7 +467,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Tests"
+                        }
                     }
                 }
             }
@@ -460,7 +484,10 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TestGroups"
+                        }
                     }
                 }
             },
@@ -475,12 +502,18 @@
                         "name": "data",
                         "required": true,
                         "type": "object",
-                        "description": "testTemplate"
+                        "description": "testTemplate",
+                        "schema": {
+                            "$ref": "#/definitions/TestGroup"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TestGroup"
+                        }
                     }
                 }
             },
@@ -500,7 +533,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TestGroups"
+                        }
                     }
                 }
             }
@@ -590,6 +626,131 @@
             "type": "array",
             "items": {
                 "$ref": "#/definitions/User"
+            }
+        },
+        "Tests": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Test"
+            }
+        },
+        "TestGroups": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/TestGroup"
+            }
+        },
+        "IRefValue": {
+            "properties": {
+                "max": {
+                    "type": "string"
+                },
+                "min": {
+                    "type": "string"
+                },
+                "specialRefs": {
+                    "properties": {
+                        "yourCustomRef": {
+                            "properties": {
+                                "max": {
+                                    "type": "string"
+                                },
+                                "min": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ITranslation": {
+            "properties": {
+                "ru": {
+                    "type": "string"
+                },
+                "en": {
+                    "type": "string"
+                },
+                "ua": {
+                    "type": "string"
+                }
+            }
+        },
+        "Test": {
+            "properties": {
+                "typeId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "refValue": {
+                    "type": "object",
+                    "$ref": "#/definitions/IRefValue"
+                },
+                "title": {
+                    "type": "object",
+                    "$ref": "#/definitions/ITranslation"
+                },
+                "description": {
+                    "type": "object",
+                    "$ref": "#/definitions/ITranslation"
+                },
+                "unit": {
+                    "type": "object",
+                    "$ref": "#/definitions/ITranslation"
+                }
+            }
+        },
+        "IErrorMessage": {
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "TestGroup": {
+            "properties": {
+                "typeId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "clientId": {
+                    "type": "string"
+                },
+                "doctorId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "object",
+                    "$ref": "#/definitions/ITranslation"
+                },
+                "description": {
+                    "type": "object",
+                    "$ref": "#/definitions/ITranslation"
+                },
+                "tests": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Test"
+                    }
+                },
+                "error": {
+                    "type": "object",
+                    "$ref": "#/definitions/IErrorMessage"
+                }
             }
         }
     },

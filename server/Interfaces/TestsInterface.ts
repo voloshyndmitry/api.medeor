@@ -1,5 +1,4 @@
 import { IErrorMessage } from "../Helpers/Validation";
-
 export interface ITest {
     typeId: string,
     id?: string,
