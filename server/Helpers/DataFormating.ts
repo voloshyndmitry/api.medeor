@@ -27,7 +27,7 @@ export const testGroupTemplateFormatting = (data: any): ITestsGroup => {
     const {
         name,
         description,
-        tests
+        tests = []
     } = data;
 
     return {
