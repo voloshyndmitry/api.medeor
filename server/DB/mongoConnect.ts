@@ -1,5 +1,3 @@
-import { getMailerApiKey } from "./Config/ConfigConnector";
-
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config()
 
@@ -22,7 +20,6 @@ const connect = async () => {
     try {
         await client.connect();
         console.log('DB connected');
-        console.log("getMailerApiKey----<", getMailerApiKey())
 
     } catch (e) {
         console.error(e);
