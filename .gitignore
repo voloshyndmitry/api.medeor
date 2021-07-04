@@ -7,3 +7,6 @@ dist
 
 # IDE
 .vscode
+
+# Variables
+.env

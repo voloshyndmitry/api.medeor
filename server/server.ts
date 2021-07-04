@@ -10,12 +10,16 @@ import { ClientsController } from "./Api/ClientsController";
 import MongoDb from './DB/mongoConnect'
 import { TestController } from "./Api/TestsController";
 require('dotenv').config()
+
 const swaggerDocument: { [name: string]: any } = require("../swagger.json");
+
+
 const isDev = process.env.ENV === 'dev';
-swaggerDocument['host'] = isDev ? 'localhost:3002' : 'api-medeor.herokuapp.com';
 
 const app = express();
 const PORT = process.env.PORT || 3002;
+
+swaggerDocument['host'] = isDev ? `localhost:${PORT}` : 'api-medeor.herokuapp.com';
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(compression())

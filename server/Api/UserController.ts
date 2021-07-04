@@ -5,6 +5,7 @@ import MongoDb from '../DB/mongoConnect'
 import { AuthorizeService as AuthorizeService } from '../Services/AuthorizeService';
 import { addUser, deleteUserById, getUserDataById, updateUser } from '../DB/Users/UsersConnector';
 import { editUserValidation, userValidation } from '../Helpers/Validation';
+import { regMail, transporter } from '../Helpers/Meiler';
 
 
 export class UserController {
@@ -63,12 +64,19 @@ export class UserController {
 
     private addUser = async (req: Request, res: Response) => {
         const { body } = req;
+
         const user: any = userValidation(body)
+
         if (!user?.error) {
             user.id = this.generateUserId()
-            const result = await addUser(user)
+            try {
+                const result = await addUser(user)
+                await transporter.sendMail(regMail(user.email));
+                return res.json(result)
 
-            return res.json(result)
+            } catch (err) {
+                return res.json({ status: 'error', message: err })
+            }
         }
         res.json(user)
     }

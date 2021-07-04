@@ -168,13 +168,6 @@
                         "schema": {
                             "$ref": "#/definitions/User"
                         }
-                    },
-                    {
-                        "in": "header",
-                        "name": "authorization",
-                        "required": true,
-                        "type": "string",
-                        "description": "token"
                     }
                 ],
                 "responses": {
@@ -603,6 +596,9 @@
                     "type": "string"
                 },
                 "name": {
+                    "type": "string"
+                },
+                "email": {
                     "type": "string"
                 },
                 "surname": {
