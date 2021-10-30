@@ -29,11 +29,9 @@ export class ClientsController {
 
     private getClients = async (req: AuthRequest, res: Response) => {
         const { userId = '' } = req;
-        const clients: Client[] = await getClientsByDoctorId(userId)
-        if (clients?.length) {
-            return res.json({ clients })
-        }
-        return res.json(this.defaultError)
+        const clients: Client[] = await getClientsByDoctorId(userId) || []
+
+        return res.json({ clients })
     }
 
     private getClient = async (req: AuthRequest, res: Response) => {
