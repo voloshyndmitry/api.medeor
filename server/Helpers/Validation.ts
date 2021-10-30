@@ -4,11 +4,12 @@ import { User } from "../Interfaces/UsersInterface";
 import isEmail from 'validator/lib/isEmail';
 import isPhone from 'validator/lib/isMobilePhone';
 import { ITestsGroup } from "../Interfaces/TestsInterface";
-
+import { isUserEmailExist } from '../DB/Users/UsersConnector';
 
 enum ErrorType {
     REQUIRED = 'required',
-    VALIDATION = 'validation'
+    VALIDATION = 'validation',
+    EXIST = "exist"
 }
 
 enum EMessage {
@@ -49,6 +50,9 @@ const errorMessage: any = {
         phone: 'Phone number is not valid',
         email: 'Email is not valid',
         tests: 'Test is not valid'
+    },
+    exist: {
+        email: "An account with this email already exists "
     }
 }
 
@@ -135,7 +139,7 @@ export const clientValidation = (client: any): Client | IErrorMessage => {
     }
 }
 
-export const userValidation = (user: User) => {
+export const userValidation = async (user: User) => {
     const {
         id,
         name,
@@ -150,6 +154,7 @@ export const userValidation = (user: User) => {
     if (!name) { return getError(ErrorType.REQUIRED, EMessage.NAME) }
     if (!surname) { return getError(ErrorType.REQUIRED, EMessage.SUR_NAME) }
     if (!email) { return getError(ErrorType.REQUIRED, EMessage.EMAIL) }
+    if (await isUserEmailExist(email)) { return getError(ErrorType.EXIST, EMessage.EMAIL) }
     if (!phone) { return getError(ErrorType.VALIDATION, EMessage.PHONE) }
     // if (phone && !isPhone(phone)) { return getError(ErrorType.VALIDATION, EMessage.PHONE) }
     if (!isEmail(email)) { return getError(ErrorType.VALIDATION, EMessage.EMAIL) }

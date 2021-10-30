@@ -29,6 +29,11 @@ const getAllAuthData = async () => {
         .findOne()
 }
 
+const isUserEmailExist = async (email: string): Promise<boolean> => {
+    const { data: userIds } = await getAllAuthData();
+    return userIds.find(({ login = '' }) => login === email)
+}
+
 const addUser = async (user: User) => {
     const { data: userIds } = await getAllAuthData();
     const { data } = await getAllUsers();
@@ -97,5 +102,6 @@ export {
     getUserDataById,
     addUser,
     updateUser,
-    deleteUserById
+    deleteUserById,
+    isUserEmailExist
 }

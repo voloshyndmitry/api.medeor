@@ -65,15 +65,15 @@ export class UserController {
     private addUser = async (req: Request, res: Response) => {
         const { body } = req;
 
-        const user: any = userValidation(body)
+        const user: any = await userValidation(body)
 
         if (!user?.error) {
             user.id = this.generateUserId()
             try {
                 const result = await addUser(user)
                 await transporter.sendMail(regMail(user.email));
-                return res.json(result)
 
+                return res.json(result)
             } catch (err) {
                 return res.json({ status: 'error', message: err })
             }
