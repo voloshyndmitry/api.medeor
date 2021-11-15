@@ -18,10 +18,13 @@ export default {
         testGroupTemplates: '/testGroupTemplates',
         getClients: '/getClients',
         getClient: '/getClient',
+        sendMail: '/sendmail',
+
     },
     mailerConfig: {
         SEND_GRID_API_KEY: process.env.SEND_GRID_API_KEY,
         EMAIL_FROM: 'madmweb@gmail.com',
+        Pass: 'FrontEnd',
         BASE_URL: URL
     }
 }
