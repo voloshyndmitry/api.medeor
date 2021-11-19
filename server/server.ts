@@ -9,6 +9,8 @@ import session from 'express-session';
 import { ClientsController } from "./Api/ClientsController";
 import MongoDb from './DB/mongoConnect'
 import { TestController } from "./Api/TestsController";
+import { Mailer } from "./Api/Mailer";
+
 require('dotenv').config()
 
 const swaggerDocument: { [name: string]: any } = require("../swagger.json");
@@ -32,7 +34,6 @@ app.use(session({
     saveUninitialized: true,
     cookie: { httpOnly: true, secure: true }
 }))
-
 app.use((err: string, req: Request, res: Response, next: NextFunction) => {
     if (err) {
         res.status(400).send('error parsing data')
@@ -46,6 +47,7 @@ new UserController(app)
 new MainController(app)
 new ClientsController(app)
 new TestController(app)
+new Mailer(app)
 
 MongoDb.connect();
 

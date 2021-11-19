@@ -533,7 +533,37 @@
                     }
                 }
             }
+        },
+        "/sendMail": {
+            "post": {
+                "tags": [
+                    "Mailer"
+                ],
+                "summary": "Add message",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "required": true,
+                        "type": "object",
+                        "description": "Add user comments and messages from contact form",
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }
+                }
+            }
+            
         }
+
     },
     "definitions": {
         "Client": {
@@ -614,6 +644,19 @@
                     "type": "string"
                 },
                 "photo": {
+                    "type": "string"
+                }
+            }
+        },
+        "user": {
+            "properties": {
+                "userEmail": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "message": {
                     "type": "string"
                 }
             }

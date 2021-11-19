@@ -18,10 +18,14 @@ export default {
         testGroupTemplates: '/testGroupTemplates',
         getClients: '/getClients',
         getClient: '/getClient',
+        sendMail: '/sendMail',
+
     },
     mailerConfig: {
         SEND_GRID_API_KEY: process.env.SEND_GRID_API_KEY,
         EMAIL_FROM: 'madmweb@gmail.com',
-        BASE_URL: URL
+        BASE_URL: URL,
+        host: "smtp.gmail.com",
+        port: 465,
     }
 }
