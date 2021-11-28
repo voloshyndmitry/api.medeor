@@ -1,11 +1,24 @@
-import nodemailer from 'nodemailer';
+import nodemailer, { SentMessageInfo } from 'nodemailer';
 import Constants from '../Constants';
 
-const sendgrid = require('nodemailer-sendgrid-transport');
+export interface IMailOptions {
+    from: string;
+    to: string;
+    subject: string;
+    html: string;
+}
 
-export const transporter = nodemailer.createTransport(sendgrid({
-    auth: { api_key: Constants.mailerConfig.SEND_GRID_API_KEY }
-}));
+export interface IMailerCallBack { (info: SentMessageInfo): void;(arg0: string): void; }
+
+export const transporter = nodemailer.createTransport({
+    host: Constants.mailerConfig.host,
+    port: Constants.mailerConfig.port,
+    secure: true,
+    auth: {
+        user: Constants.mailerConfig.EMAIL_FROM,
+        pass: process.env.PASS
+    }
+});
 
 
 export const regMail = (email: string) => {
@@ -19,4 +32,17 @@ export const regMail = (email: string) => {
       <hr/>
       <a href="${Constants.mailerConfig.BASE_URL}">Medeor</a>`
     };
+}
+
+export const newComment = (user: { userEmail: any; userName: any; message: any; }) => ({
+    from: user.userEmail,
+    to: Constants.mailerConfig.EMAIL_FROM,
+    subject: "New comment from Medeor client",
+    html: `<p>My name is ${user.userName}.</p>
+    <p>${user.message}. You can contact me at my email ${user.userEmail}.</p>`
+})
+
+export const sendMail = async (mailOptions: IMailOptions, callback?: IMailerCallBack): Promise<void> => {
+    const info = await transporter.sendMail(mailOptions);
+    callback?.(info);
 }

@@ -1,15 +1,16 @@
 import express, { NextFunction, Request, Response } from "express";
-import bodyParser from 'body-parser';
-import { UserController } from './Api/UserController'
-import cors from 'cors';
-import compression from 'compression';
-import { MainController } from "./Api/MainController";
 import swaggerUi from 'swagger-ui-express';
 import session from 'express-session';
+import compression from 'compression';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+
 import { ClientsController } from "./Api/ClientsController";
-import MongoDb from './DB/mongoConnect'
 import { TestController } from "./Api/TestsController";
-import { Mailer } from "./Api/Mailer";
+import { MainController } from "./Api/MainController";
+import { UserController } from './Api/UserController'
+import { Mailer } from "./Api/MailerController";
+import MongoDb from './DB/mongoConnect'
 
 require('dotenv').config()
 
