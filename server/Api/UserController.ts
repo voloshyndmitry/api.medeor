@@ -5,7 +5,7 @@ import MongoDb from '../DB/mongoConnect'
 import { AuthorizeService as AuthorizeService } from '../Services/AuthorizeService';
 import { addUser, deleteUserById, getUserDataById, updateUser } from '../DB/Users/UsersConnector';
 import { editUserValidation, userValidation } from '../Helpers/Validation';
-import { regMail, transporter } from '../Helpers/Meiler';
+import { regMail, sendMail } from '../Helpers/Meiler';
 
 
 export class UserController {
@@ -71,7 +71,7 @@ export class UserController {
             user.id = this.generateUserId()
             try {
                 const result = await addUser(user)
-                await transporter.sendMail(regMail(user.email));
+                await sendMail(regMail(user.email));
 
                 return res.json(result)
             } catch (err) {
