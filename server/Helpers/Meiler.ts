@@ -20,7 +20,6 @@ export const transporter = nodemailer.createTransport({
     }
 });
 
-
 export const regMail = (email: string) => {
     return {
         to: email,
@@ -42,7 +41,13 @@ export const newComment = (user: { userEmail: any; userName: any; message: any; 
     <p>${user.message}. You can contact me at my email ${user.userEmail}.</p>`
 })
 
-export const sendMail = async (mailOptions: IMailOptions, callback?: IMailerCallBack): Promise<void> => {
-    const info = await transporter.sendMail(mailOptions);
-    callback?.(info);
+export const sendMail = async (mailOptions: IMailOptions, callback?: IMailerCallBack): Promise<SentMessageInfo> => {
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        callback?.(info);
+        return info;
+    }
+    catch (error) {
+        return { error }
+    }
 }

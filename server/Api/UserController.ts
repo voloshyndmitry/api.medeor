@@ -71,9 +71,9 @@ export class UserController {
             user.id = this.generateUserId()
             try {
                 const result = await addUser(user)
-                await sendMail(regMail(user.email));
+                const mailInfo = await sendMail(regMail(user.email));
 
-                return res.json(result)
+                return res.json({ ...result, mailInfo })
             } catch (err) {
                 return res.json({ status: 'error', message: err })
             }
