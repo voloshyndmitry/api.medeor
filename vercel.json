@@ -1,4 +1,14 @@
 {
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "vercel-sapper"
+        },
+        {
+            "src": "dist/server.js",
+            "use": "@now/node"
+        }
+    ],
     "rewrites": [
         {
             "source": "/(.*)",
