@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "music-album",
+    "name": "api.medeor",
     "builds": [
         {
             "src": "/dist/server.js",
@@ -10,7 +10,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/dist/server.js"
+            "destination": "/dist/server.js"
         }
     ]
 }
