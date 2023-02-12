@@ -1,16 +1,15 @@
 {
     "version": 2,
-    "name": "api.medeor",
     "builds": [
         {
-            "src": "/dist/server.js",
-            "use": "@vercel/node"
+            "src": "dist/server.js",
+            "use": "@now/node"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "destination": "/dist/server.js"
+            "dest": "dist/server.js"
         }
     ]
 }
