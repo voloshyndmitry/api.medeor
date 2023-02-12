@@ -1,19 +1,8 @@
 {
-    "version": 2,
-    "builds": [
+    "rewrites": [
         {
-            "src": "package.json",
-            "use": "vercel-sapper"
-        },
-        {
-            "src": "dist/server.js",
-            "use": "@now/node"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "dist/server.js"
+            "source": "/(.*)",
+            "destination": "/dist/server.js"
         }
     ]
 }
