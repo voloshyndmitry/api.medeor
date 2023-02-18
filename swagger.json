@@ -561,9 +561,7 @@
                     }
                 }
             }
-            
         }
-
     },
     "definitions": {
         "Client": {
@@ -735,16 +733,13 @@
                     "$ref": "#/definitions/IRefValue"
                 },
                 "title": {
-                    "type": "object",
-                    "$ref": "#/definitions/ITranslation"
+                    "type": "string"
                 },
                 "description": {
-                    "type": "object",
-                    "$ref": "#/definitions/ITranslation"
+                    "type": "string"
                 },
                 "unit": {
-                    "type": "object",
-                    "$ref": "#/definitions/ITranslation"
+                    "type": "string"
                 }
             }
         },
@@ -773,12 +768,10 @@
                     "type": "string"
                 },
                 "name": {
-                    "type": "object",
-                    "$ref": "#/definitions/ITranslation"
+                    "type": "string"
                 },
                 "description": {
-                    "type": "object",
-                    "$ref": "#/definitions/ITranslation"
+                    "type": "string"
                 },
                 "tests": {
                     "type": "array",

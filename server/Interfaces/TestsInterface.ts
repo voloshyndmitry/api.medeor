@@ -5,9 +5,9 @@ export interface ITest {
     code?: string,
     value: string,
     refValue?: IRefValue,
-    title?: ITranslation,
-    description?: ITranslation,
-    unit?: ITranslation,
+    title?: string,
+    description?: string,
+    unit?: string,
 }
 
 interface IRefValue {
@@ -28,8 +28,8 @@ export interface ITestsGroup {
     date: string,
     clientId?: string,
     doctorId?: string,
-    name?: ITranslation,
-    description?: ITranslation,
+    name?: string,
+    description?: string,
     tests: ITest[],
     error?: IErrorMessage
 }
