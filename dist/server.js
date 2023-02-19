@@ -20,7 +20,7 @@ var swaggerDocument = require("../swagger.json");
 var isDev = process.env.ENV === 'dev';
 var app = express_1.default();
 var PORT = process.env.PORT || 3002;
-swaggerDocument['host'] = isDev ? "localhost:" + PORT : 'api-medeor.herokuapp.com';
+swaggerDocument['host'] = isDev ? "localhost:" + PORT : 'api-medeor-one.vercel.app';
 app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
 app.use(compression_1.default());
 app.use(body_parser_1.default.json());

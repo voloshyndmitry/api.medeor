@@ -22,7 +22,7 @@ const isDev = process.env.ENV === 'dev';
 const app = express();
 const PORT = process.env.PORT || 3002;
 
-swaggerDocument['host'] = isDev ? `localhost:${PORT}` : 'api-medeor.herokuapp.com';
+swaggerDocument['host'] = isDev ? `localhost:${PORT}` : 'api-medeor-one.vercel.app';
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(compression())
