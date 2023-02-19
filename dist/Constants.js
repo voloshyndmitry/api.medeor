@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 var isDev = process.env.ENV === 'dev';
 var PORT = process.env.PORT || 3002;
-var URL = isDev ? "http://localhost:" + PORT : 'https://api-medeor.herokuapp.com';
+var URL = isDev ? "http://localhost:" + PORT : 'https://api-medeor-one.vercel.app';
 exports.default = {
     apiUrls: {
         main: '/',

@@ -3,7 +3,7 @@ require('dotenv').config()
 const isDev = process.env.ENV === 'dev';
 const PORT = process.env.PORT || 3002;
 
-const URL: string = isDev ? `http://localhost:${PORT}` : 'https://api-medeor.herokuapp.com';
+const URL: string = isDev ? `http://localhost:${PORT}` : 'https://api-medeor-one.vercel.app';
 
 export default {
     apiUrls: {
