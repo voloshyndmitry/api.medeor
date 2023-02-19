@@ -5,6 +5,7 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
+import {customCss} from './swagger/customStyles';
 import { ClientsController } from "./Api/ClientsController";
 import { TestController } from "./Api/TestsController";
 import { MainController } from "./Api/MainController";
@@ -24,7 +25,11 @@ const PORT = process.env.PORT || 3002;
 
 swaggerDocument['host'] = isDev ? `localhost:${PORT}` : 'api-medeor-one.vercel.app';
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const options = {
+    customCss
+}
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.use(compression())
 app.use(bodyParser.json())
 app.use(cors())

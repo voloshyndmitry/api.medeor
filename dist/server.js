@@ -9,6 +9,7 @@ var express_session_1 = __importDefault(require("express-session"));
 var compression_1 = __importDefault(require("compression"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var cors_1 = __importDefault(require("cors"));
+var customStyles_1 = require("./swagger/customStyles");
 var ClientsController_1 = require("./Api/ClientsController");
 var TestsController_1 = require("./Api/TestsController");
 var MainController_1 = require("./Api/MainController");
@@ -21,7 +22,10 @@ var isDev = process.env.ENV === 'dev';
 var app = express_1.default();
 var PORT = process.env.PORT || 3002;
 swaggerDocument['host'] = isDev ? "localhost:" + PORT : 'api-medeor-one.vercel.app';
-app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
+var options = {
+    customCss: customStyles_1.customCss
+};
+app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument, options));
 app.use(compression_1.default());
 app.use(body_parser_1.default.json());
 app.use(cors_1.default());
