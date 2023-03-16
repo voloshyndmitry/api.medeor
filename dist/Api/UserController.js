@@ -99,6 +99,24 @@ var UserController = /** @class */ (function () {
                 }
             });
         }); };
+        this.getUsersData = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var users, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, UsersConnector_1.getAllUsersPublicData()];
+                    case 1:
+                        users = _a.sent();
+                        return [2 /*return*/, res.json(users !== null && users !== void 0 ? users : this.defaultError)];
+                    case 2:
+                        error_1 = _a.sent();
+                        console.log("getUsersData error:", error_1);
+                        return [2 /*return*/, res.json(this.defaultError)];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); };
         this.deleteUser = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
             var id, users;
             return __generator(this, function (_a) {
@@ -169,9 +187,10 @@ var UserController = /** @class */ (function () {
         this.setRequestHandlers();
     }
     UserController.prototype.setRequestHandlers = function () {
-        var _a = this.constants.apiUrls, login = _a.login, user = _a.user;
+        var _a = this.constants.apiUrls, login = _a.login, user = _a.user, users = _a.users;
         this.app.get(login, this.getUserId);
         this.app.get(user, this.autService.authenticateToken, this.getUserData);
+        this.app.get(users, this.autService.authenticateToken, this.getUsersData);
         this.app.post(user, this.addUser);
         this.app.put(user, this.autService.authenticateToken, this.updateUser);
         this.app.patch(user, this.autService.authenticateToken, this.updateUser);

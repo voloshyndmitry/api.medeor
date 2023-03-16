@@ -64,6 +64,16 @@ const getAllUsers = async () => {
         .findOne()
 }
 
+const getAllUsersPublicData = async () => {
+    const { data } = await getAllUsers();
+    
+    return data.map((item: User) => {
+        const { pass, ...publicUserData } = item;
+
+        return publicUserData;
+    }) 
+}
+
 const updateUser = async (user: User) => {
     const { data } = await getAllUsers();
     const updatedUsers = data.map((item: User) => {
@@ -103,5 +113,6 @@ export {
     addUser,
     updateUser,
     deleteUserById,
-    isUserEmailExist
+    isUserEmailExist,
+    getAllUsersPublicData
 }

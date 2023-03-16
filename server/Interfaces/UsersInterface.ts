@@ -8,6 +8,7 @@ export interface User {
     location?: string,
     specialties?: string,
     photo?: string
+    approvedToShow?: string;
 }
 
 export interface UserAutData { login: string, pass: string, id: string }

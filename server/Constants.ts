@@ -9,6 +9,7 @@ export default {
     apiUrls: {
         main: '/',
         user: '/user',
+        users: '/users',
         login: '/login',
         client: '/client',
         clients: '/clients',
