@@ -3,7 +3,7 @@ import { Application, Request, Response } from 'express';
 import Constants from '../Constants';
 import MongoDb from '../DB/mongoConnect'
 import { AuthorizeService as AuthorizeService } from '../Services/AuthorizeService';
-import { addUser, deleteUserById, getUserDataById, updateUser } from '../DB/Users/UsersConnector';
+import { addUser, deleteUserById, getAllUsersPublicData, getUserDataById, updateUser } from '../DB/Users/UsersConnector';
 import { editUserValidation, userValidation } from '../Helpers/Validation';
 import { regMail, sendMail } from '../Helpers/Meiler';
 
@@ -20,9 +20,10 @@ export class UserController {
     }
 
     private setRequestHandlers() {
-        const { apiUrls: { login, user } } = this.constants;
+        const { apiUrls: { login, user, users } } = this.constants;
         this.app.get(login, this.getUserId)
         this.app.get(user, this.autService.authenticateToken, this.getUserData)
+        this.app.get(users, this.autService.authenticateToken, this.getUsersData)
         this.app.post(user, this.addUser)
         this.app.put(user, this.autService.authenticateToken, this.updateUser)
         this.app.patch(user, this.autService.authenticateToken, this.updateUser)
@@ -48,6 +49,17 @@ export class UserController {
             return res.json(user || this.defaultError)
         }
         res.json(this.defaultError)
+    }
+
+    private getUsersData = async (req: Request, res: Response) => {
+        try {
+            const users = await getAllUsersPublicData()
+            return res.json(users ?? this.defaultError)
+        } catch(error) {
+            console.log("getUsersData error:", error);
+            return res.json(this.defaultError)
+
+        }
     }
 
     private deleteUser = async (req: Request, res: Response) => {

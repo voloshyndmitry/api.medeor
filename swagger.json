@@ -210,6 +210,34 @@
                 }
             }
         },
+        "/users": {
+            "get": {
+                "tags": [
+                    "User Controller"
+                ],
+                "summary": "Get user in system",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "required": true,
+                        "type": "string",
+                        "description": "token",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
         "/client": {
             "get": {
                 "tags": [
@@ -642,6 +670,9 @@
                     "type": "string"
                 },
                 "photo": {
+                    "type": "string"
+                },
+                "approvedToShow": {
                     "type": "string"
                 }
             }

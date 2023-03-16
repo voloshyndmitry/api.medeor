@@ -46,6 +46,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __spreadArrays = (this && this.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -57,7 +68,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isUserEmailExist = exports.deleteUserById = exports.updateUser = exports.addUser = exports.getUserDataById = exports.getAllAuthData = void 0;
+exports.getAllUsersPublicData = exports.isUserEmailExist = exports.deleteUserById = exports.updateUser = exports.addUser = exports.getUserDataById = exports.getAllAuthData = void 0;
 var mongoConnect_1 = __importDefault(require("../mongoConnect"));
 var client = mongoConnect_1.default.client;
 var dbName = 'medeordb';
@@ -169,6 +180,21 @@ var getAllUsers = function () { return __awaiter(void 0, void 0, void 0, functio
                 .findOne()];
     });
 }); };
+var getAllUsersPublicData = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var data;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, getAllUsers()];
+            case 1:
+                data = (_a.sent()).data;
+                return [2 /*return*/, data.map(function (item) {
+                        var pass = item.pass, publicUserData = __rest(item, ["pass"]);
+                        return publicUserData;
+                    })];
+        }
+    });
+}); };
+exports.getAllUsersPublicData = getAllUsersPublicData;
 var updateUser = function (user) { return __awaiter(void 0, void 0, void 0, function () {
     var data, updatedUsers, userIds, newUserIds;
     return __generator(this, function (_a) {
