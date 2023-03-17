@@ -52,7 +52,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.editUserValidation = exports.userValidation = exports.clientValidation = exports.testGroupValidation = void 0;
 var isEmail_1 = __importDefault(require("validator/lib/isEmail"));
-var isMobilePhone_1 = __importDefault(require("validator/lib/isMobilePhone"));
 var UsersConnector_1 = require("../DB/Users/UsersConnector");
 var ErrorType;
 (function (ErrorType) {
@@ -173,9 +172,7 @@ var clientValidation = function (client) {
     if (!email) {
         return getError(ErrorType.REQUIRED, EMessage.EMAIL);
     }
-    if (!isMobilePhone_1.default(phone)) {
-        return getError(ErrorType.VALIDATION, EMessage.PHONE);
-    }
+    // if (!isPhone(phone)) { return getError(ErrorType.VALIDATION, EMessage.PHONE) }
     if (!isEmail_1.default(email)) {
         return getError(ErrorType.VALIDATION, EMessage.EMAIL);
     }

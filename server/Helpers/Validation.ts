@@ -2,7 +2,7 @@ import { ITest } from './../Interfaces/TestsInterface';
 import { Client } from "../Interfaces/ClientsInterface";
 import { User } from "../Interfaces/UsersInterface";
 import isEmail from 'validator/lib/isEmail';
-import isPhone from 'validator/lib/isMobilePhone';
+// import isPhone from 'validator/lib/isMobilePhone';
 import { ITestsGroup } from "../Interfaces/TestsInterface";
 import { isUserEmailExist } from '../DB/Users/UsersConnector';
 
@@ -121,7 +121,7 @@ export const clientValidation = (client: any): Client | IErrorMessage => {
     if (!birthday) { return getError(ErrorType.REQUIRED, EMessage.BIRTHDAY) }
     if (!phone) { return getError(ErrorType.REQUIRED, EMessage.PHONE) }
     if (!email) { return getError(ErrorType.REQUIRED, EMessage.EMAIL) }
-    if (!isPhone(phone)) { return getError(ErrorType.VALIDATION, EMessage.PHONE) }
+    // if (!isPhone(phone)) { return getError(ErrorType.VALIDATION, EMessage.PHONE) }
     if (!isEmail(email)) { return getError(ErrorType.VALIDATION, EMessage.EMAIL) }
 
     return {
