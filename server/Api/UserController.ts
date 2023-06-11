@@ -22,8 +22,10 @@ export class UserController {
     private setRequestHandlers() {
         const { apiUrls: { login, user, users } } = this.constants;
         this.app.get(login, this.getUserId)
-        this.app.get(user, this.autService.authenticateToken, this.getUserData)
-        this.app.get(users, this.autService.authenticateToken, this.getUsersData)
+        this.app.get(user, this.getUserData)
+        this.app.get(users, this.getUsersData)
+        // this.app.get(user, this.autService.authenticateToken, this.getUserData)
+        // this.app.get(users, this.autService.authenticateToken, this.getUsersData)
         this.app.post(user, this.addUser)
         this.app.put(user, this.autService.authenticateToken, this.updateUser)
         this.app.patch(user, this.autService.authenticateToken, this.updateUser)
